@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/farmcheck
+    username: postgres
+    password: test12345
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  flyway:
+    url: jdbc:postgresql://localhost:5432/farmcheck
+    user: postgres
+    password: test12345
+    locations: classpath:src/main/resources/db/migration
