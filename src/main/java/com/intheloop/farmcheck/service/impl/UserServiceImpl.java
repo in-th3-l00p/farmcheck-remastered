@@ -2,6 +2,7 @@ package com.intheloop.farmcheck.service.impl;
 
 import com.intheloop.farmcheck.domain.Authority;
 import com.intheloop.farmcheck.domain.User;
+import com.intheloop.farmcheck.repository.AuthorityRepository;
 import com.intheloop.farmcheck.repository.UserRepository;
 import com.intheloop.farmcheck.security.PasswordEncoder;
 import com.intheloop.farmcheck.service.UserService;
@@ -14,20 +15,27 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
+    private Authority userAuthority;
 
     @Autowired
     public UserServiceImpl(
             UserRepository userRepository,
+            AuthorityRepository authorityRepository,
             PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
+        this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
+
+        authorityRepository.findByAuthority("user")
+                .ifPresent(authority -> userAuthority = authority);
     }
 
 
     @Override
-    public User create(
+    public void create(
             String username,
             String firstName,
             String lastName,
@@ -49,7 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(email);
         user.setPassword(encodedPassword);
         user.setAuthorities(authorities);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
@@ -60,5 +68,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> get(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Authority getUserAuthority() {
+        return userAuthority;
     }
 }

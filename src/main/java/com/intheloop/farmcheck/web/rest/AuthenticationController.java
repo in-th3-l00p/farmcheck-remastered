@@ -10,11 +10,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
     private record LoginBody(String username, String password) {}
+    private record RegisterBody(
+            String username,
+            String firstName, String lastName,
+            String email,
+            String password
+    ) {}
+
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
@@ -36,5 +45,22 @@ public class AuthenticationController {
         )
             return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(JWTGenerator.encodeToken(user.get()));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterBody registerBody) {
+        try {
+            userService.create(
+                    registerBody.username,
+                    registerBody.firstName,
+                    registerBody.lastName,
+                    registerBody.email,
+                    registerBody.password,
+                    Set.of(userService.getUserAuthority())
+                    );
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok("Account registered.");
     }
 }

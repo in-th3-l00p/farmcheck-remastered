@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
-    User create(
+    void create(
             String username,
             String firstName,
             String lastName,
@@ -19,4 +19,6 @@ public interface UserService {
     boolean exists(String username);
 
     Optional<User> get(String username);
+
+    Authority getUserAuthority();
 }

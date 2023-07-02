@@ -1,6 +1,7 @@
 package com.intheloop.farmcheck;
 
 import com.intheloop.farmcheck.domain.Authority;
+import com.intheloop.farmcheck.repository.AuthorityRepository;
 import com.intheloop.farmcheck.repository.UserRepository;
 import com.intheloop.farmcheck.security.PasswordEncoder;
 import com.intheloop.farmcheck.service.UserService;
@@ -26,11 +27,14 @@ public class UserServiceTests {
     @MockBean
     private UserRepository userRepository;
 
+    @MockBean
+    private AuthorityRepository authorityRepository;
+
     private UserService userService;
 
     @BeforeEach
     void initializeUserService() {
-        userService = new UserServiceImpl(userRepository, passwordEncoder);
+        userService = new UserServiceImpl(userRepository, authorityRepository, passwordEncoder);
     }
 
     @Test
