@@ -20,9 +20,12 @@ public class SecurityConfiguration {
         http
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(
-                        (requests) -> requests.anyRequest().permitAll()
+                        (requests) -> requests
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .anyRequest().authenticated()
                 )
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

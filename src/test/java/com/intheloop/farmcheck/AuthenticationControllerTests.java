@@ -40,6 +40,10 @@ public class AuthenticationControllerTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(String.format("{\"username\": \"%s\", \"password\": \"%s\"}", username, password)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/api/v1/user")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
         var encodedUser = new User();
         encodedUser.setUsername(username);
         encodedUser.setPassword(passwordEncoder.encode(password));

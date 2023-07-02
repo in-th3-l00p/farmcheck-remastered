@@ -40,7 +40,7 @@ public class AuthenticationFilter implements Filter {
                 return;
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
+                        userDetails.getUsername(), null, userDetails.getAuthorities()
                     )
             );
         } catch (Exception ignored) { }
