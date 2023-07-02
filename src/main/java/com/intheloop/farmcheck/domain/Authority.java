@@ -17,10 +17,14 @@ public class Authority implements GrantedAuthority {
     @Column(nullable = false)
     private String authority;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> users;
 
     public Authority() {
+    }
+
+    public Authority(String authority) {
+        this.authority = authority;
     }
 
     public Long getId() {
