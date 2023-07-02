@@ -15,7 +15,6 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private Authority userAuthority;
 
@@ -26,7 +25,6 @@ public class UserServiceImpl implements UserService {
             PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
-        this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
 
         authorityRepository.findByAuthority("user")
@@ -56,7 +54,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(encodedPassword);
-        user.setAuthorities(authorities);
+        user.getAuthorities().addAll(authorities);
         userRepository.save(user);
     }
 

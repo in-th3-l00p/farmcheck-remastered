@@ -4,6 +4,7 @@ import com.intheloop.farmcheck.security.JWTGenerator;
 import com.intheloop.farmcheck.security.PasswordEncoder;
 import com.intheloop.farmcheck.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,8 @@ public class AuthenticationController {
     private record LoginBody(String username, String password) {}
     private record RegisterBody(
             String username,
-            String firstName, String lastName,
+            String firstName,
+            String lastName,
             String email,
             String password
     ) {}
@@ -36,7 +38,16 @@ public class AuthenticationController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/login")
+    /**
+     * {@code POST /api/v1/auth/login} : Logins an existing user.
+     * @param credentials - the object containing the user's credentials
+     * @return the {@link String} JWT with status {@code 200 (OK)} if the credentials are correct, else {@code 400 (BAD REQUEST)}
+     */
+    @PostMapping(
+            path = "/login",
+            consumes = { MediaType.APPLICATION_JSON_VALUE },
+            produces = { MediaType.TEXT_PLAIN_VALUE }
+    )
     public ResponseEntity<?> login(@RequestBody LoginBody credentials) {
         var user = userService.get(credentials.username);
         if (
@@ -47,7 +58,16 @@ public class AuthenticationController {
         return ResponseEntity.ok(JWTGenerator.encodeToken(user.get()));
     }
 
-    @PostMapping("/register")
+    /**
+     * {@code POST /api/v1/auth/register} : Registers a new user
+     * @param registerBody - the object containing user's data
+     * @return {@code 200 (OK)} if the credentials are valid, else {@code 400 (BAD REQUEST)}
+     */
+    @PostMapping(
+            path = "/register",
+            consumes = { MediaType.APPLICATION_JSON_VALUE },
+            produces = { MediaType.TEXT_PLAIN_VALUE }
+    )
     public ResponseEntity<?> register(@RequestBody RegisterBody registerBody) {
         try {
             userService.create(
