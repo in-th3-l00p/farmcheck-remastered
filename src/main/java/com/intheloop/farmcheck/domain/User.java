@@ -3,6 +3,7 @@ package com.intheloop.farmcheck.domain;
 import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -42,9 +43,32 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
 
     @ManyToMany
-    private Set<Authority> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 
     public User() {
+    }
+
+    public User(Long id, String username, String firstName, String lastName, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Long id, String username, String firstName, String lastName, String email, String password, boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, Set<Authority> authorities) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.credentialsNonExpired = credentialsNonExpired;
+        this.authorities = authorities;
     }
 
     public Long getId() {
