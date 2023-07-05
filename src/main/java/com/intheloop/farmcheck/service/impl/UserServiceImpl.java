@@ -41,6 +41,11 @@ public class UserServiceImpl implements UserService {
             String password,
             Set<Authority> authorities
     ) {
+        if (
+                username.isEmpty() ||
+                firstName.isEmpty() ||
+                lastName.isEmpty())
+            throw new IllegalArgumentException("Invalid data");
         if (userRepository.existsByUsername(username))
             throw new IllegalArgumentException("Username is already used.");
         if (userRepository.existsByEmail(email))
@@ -71,5 +76,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Authority getUserAuthority() {
         return userAuthority;
+    }
+
+    @Override
+    public void update(User user) {
+        if (
+                user.getUsername().isEmpty() ||
+                user.getFirstName().isEmpty() ||
+                user.getLastName().isEmpty())
+            throw new IllegalArgumentException("Invalid data");
+        if (userRepository.existsByUsername(user.getUsername()))
+            throw new IllegalArgumentException("Username is already used.");
+        userRepository.save(user);
     }
 }

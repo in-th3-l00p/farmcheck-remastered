@@ -21,4 +21,6 @@ public interface UserService {
     Optional<User> get(String username);
 
     Authority getUserAuthority();
+
+    void update(User user);
 }
