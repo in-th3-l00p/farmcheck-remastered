@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "authorities")
@@ -16,9 +15,6 @@ public class Authority implements GrantedAuthority {
 
     @Column(nullable = false)
     private String authority;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> users;
 
     public Authority() {
     }
@@ -44,25 +40,17 @@ public class Authority implements GrantedAuthority {
         this.authority = authority;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Authority authority1 = (Authority) o;
-        return Objects.equals(id, authority1.id) && Objects.equals(authority, authority1.authority) && Objects.equals(users, authority1.users);
+        return Objects.equals(id, authority1.id) && Objects.equals(authority, authority1.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authority, users);
+        return Objects.hash(id, authority);
     }
 
     @Override
@@ -70,7 +58,6 @@ public class Authority implements GrantedAuthority {
         return "Authority{" +
                 "id=" + id +
                 ", authority='" + authority + '\'' +
-                ", users=" + users +
                 '}';
     }
 }

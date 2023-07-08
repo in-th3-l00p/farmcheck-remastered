@@ -22,9 +22,10 @@ public class AuthenticationUtils {
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
-        final var user = userService.get(username);
-        if (user.isEmpty())
+        try {
+            return userService.get(username);
+        } catch (Exception ignored) {
             throw new IllegalAccessException("Unauthenticated");
-        return user.get();
+        }
     }
 }

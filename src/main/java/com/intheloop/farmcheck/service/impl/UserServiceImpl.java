@@ -9,7 +9,6 @@ import com.intheloop.farmcheck.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -69,8 +68,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> get(String username) {
-        return userRepository.findByUsername(username);
+    public User get(Long id) {
+        var user = userRepository.findById(id);
+        if (user.isEmpty())
+            throw new IllegalArgumentException("User not found.");
+        return user.get();
+    }
+
+    @Override
+    public User get(String username) {
+        var user = userRepository.findByUsername(username);
+        if (user.isEmpty())
+            throw new IllegalArgumentException("User not found.");
+        return user.get();
     }
 
     @Override

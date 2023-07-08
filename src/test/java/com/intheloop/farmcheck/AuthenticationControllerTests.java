@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Optional;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,7 +47,8 @@ public class AuthenticationControllerTests {
         var encodedUser = new User();
         encodedUser.setUsername(username);
         encodedUser.setPassword(passwordEncoder.encode(password));
-        Mockito.when(userService.get(username)).thenReturn(Optional.of(encodedUser));
+        encodedUser.setAuthorities(new HashSet<>());
+        Mockito.when(userService.get(username)).thenReturn(encodedUser);
         mvc.perform(MockMvcRequestBuilders
                         .post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)

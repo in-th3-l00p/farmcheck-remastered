@@ -2,6 +2,7 @@ package com.intheloop.farmcheck.web.rest;
 
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.UserService;
+import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +49,7 @@ public class UserResource {
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
-                    .body(e.getMessage());
+                    .body(new ResponseException(e));
         }
     }
 
@@ -78,7 +79,7 @@ public class UserResource {
         } catch (IllegalArgumentException e) {
             return ResponseEntity
                     .badRequest()
-                    .body(e.getMessage());
+                    .body(new ResponseException(e));
         }
     }
 
@@ -103,7 +104,9 @@ public class UserResource {
                     Set.of(userService.getUserAuthority())
             );
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseException(e));
         }
         return ResponseEntity.ok("Account registered.");
     }

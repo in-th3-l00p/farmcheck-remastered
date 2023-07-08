@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit moduleName="farmcheck" name="Default">
+      <persistence-unit moduleName="farmcheck" name="Default" defaultSearchScope="Project">
         <packages>
           <package value="com.intheloop.farmcheck" />
         </packages>

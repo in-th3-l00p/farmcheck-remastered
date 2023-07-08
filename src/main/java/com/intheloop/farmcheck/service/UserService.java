@@ -3,7 +3,6 @@ package com.intheloop.farmcheck.service;
 import com.intheloop.farmcheck.domain.Authority;
 import com.intheloop.farmcheck.domain.User;
 
-import java.util.Optional;
 import java.util.Set;
 
 public interface UserService {
@@ -18,7 +17,8 @@ public interface UserService {
 
     boolean exists(String username);
 
-    Optional<User> get(String username);
+    User get(Long id);
+    User get(String username);
 
     Authority getUserAuthority();
 

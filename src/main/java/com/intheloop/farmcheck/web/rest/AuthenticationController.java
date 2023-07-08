@@ -38,13 +38,14 @@ public class AuthenticationController {
             produces = { MediaType.TEXT_PLAIN_VALUE }
     )
     public ResponseEntity<?> login(@RequestBody LoginBody credentials) {
-        var user = userService.get(credentials.username);
-        if (
-                user.isEmpty() ||
-                !passwordEncoder.matches(credentials.password, user.get().getPassword())
-        )
+        try {
+            var user = userService.get(credentials.username);
+            if (!passwordEncoder.matches(credentials.password, user.getPassword()))
+                return ResponseEntity.badRequest().build();
+            return ResponseEntity.ok(JWTGenerator.encodeToken(user));
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(JWTGenerator.encodeToken(user.get()));
+        }
     }
 
 }
