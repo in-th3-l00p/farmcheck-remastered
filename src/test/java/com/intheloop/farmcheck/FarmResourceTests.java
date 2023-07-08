@@ -57,7 +57,7 @@ public class FarmResourceTests {
         mvc.perform(MockMvcRequestBuilders
                         .get("/api/v1/farm?farmId=1")
                         .header("Authorization", "Bearer " + userToken))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test

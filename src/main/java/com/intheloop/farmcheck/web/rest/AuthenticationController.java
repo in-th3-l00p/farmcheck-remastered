@@ -3,6 +3,7 @@ package com.intheloop.farmcheck.web.rest;
 import com.intheloop.farmcheck.security.JWTGenerator;
 import com.intheloop.farmcheck.security.PasswordEncoder;
 import com.intheloop.farmcheck.service.UserService;
+import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class AuthenticationController {
             if (!passwordEncoder.matches(credentials.password, user.getPassword()))
                 return ResponseEntity.badRequest().build();
             return ResponseEntity.ok(JWTGenerator.encodeToken(user));
-        } catch (Exception e) {
+        } catch (ResponseException e) {
             return ResponseEntity.badRequest().build();
         }
     }

@@ -34,10 +34,8 @@ public class FarmResource {
     public ResponseEntity<?> getFarmDetails(@RequestParam("farmId") Long farmId) {
         try {
             return ResponseEntity.ok(new FarmDTO(farmService.get(farmId)));
-        } catch (Exception e) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -54,8 +52,8 @@ public class FarmResource {
         try {
             farmService.create(farmDTO.getName(), farmDTO.getDescription());
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -76,8 +74,8 @@ public class FarmResource {
         try {
             farmService.addUser(farmService.get(farmId), userService.get(userId));
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -102,8 +100,8 @@ public class FarmResource {
                     farmDTO.getDescription()
             );
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -130,8 +128,8 @@ public class FarmResource {
                     userRole
             );
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -147,8 +145,8 @@ public class FarmResource {
         try {
             farmService.deleteFarm(farmService.get(farmId));
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -172,8 +170,8 @@ public class FarmResource {
                     userService.get(userId)
             );
             return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 }

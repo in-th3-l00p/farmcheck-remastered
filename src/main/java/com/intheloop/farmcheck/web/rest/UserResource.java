@@ -5,7 +5,6 @@ import com.intheloop.farmcheck.service.UserService;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,10 +45,8 @@ public class UserResource {
             return ResponseEntity.ok(
                     new UserDTO(authenticationUtils.getAuthentication())
             );
-        } catch (Exception e) {
-            return ResponseEntity
-                    .status(HttpStatus.FORBIDDEN)
-                    .body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -72,14 +69,8 @@ public class UserResource {
             currentUser.setLastName(userDTO.getLastName());
             userService.update(currentUser);
             return ResponseEntity.ok().build();
-        } catch (IllegalAccessException e) {
-            return ResponseEntity
-                    .status(HttpStatus.FORBIDDEN)
-                    .body(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
     }
 
@@ -103,10 +94,8 @@ public class UserResource {
                     registerBody.password,
                     Set.of(userService.getUserAuthority())
             );
-        } catch (Exception e) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseException(e));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
         }
         return ResponseEntity.ok("Account registered.");
     }

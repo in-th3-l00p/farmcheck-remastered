@@ -7,16 +7,18 @@ import com.intheloop.farmcheck.repository.FarmRepository;
 import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.FarmService;
+import com.intheloop.farmcheck.utils.ResponseException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
 @Service
 public class FarmServiceImpl implements FarmService {
-    private static final IllegalAccessException UNAUTHORIZED =
-            new IllegalAccessException("You are not authorized to this farm.");
-    private static final IllegalArgumentException NOT_IN_FARM =
-            new IllegalArgumentException("User is not in the farm.");
+    private static final ResponseException UNAUTHORIZED =
+            new ResponseException("You are not authorized to this farm.", HttpStatus.UNAUTHORIZED);
+    private static final ResponseException NOT_IN_FARM =
+            new ResponseException("User is not in the farm.", HttpStatus.NOT_FOUND);
     private final FarmRepository farmRepository;
     private final FarmUserRepository farmUserRepository;
     private final AuthenticationUtils authenticationUtils;
@@ -32,11 +34,11 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void create(String name, String description) throws IllegalAccessException {
+    public void create(String name, String description) {
         if (name == null || description == null || name.length() == 0)
-            throw new IllegalArgumentException("Invalid data.");
+            throw new ResponseException("Invalid data.");
         if (farmRepository.findByName(name).isPresent())
-            throw new IllegalArgumentException("Name is already used.");
+            throw new ResponseException("Name is already used.");
         Farm farm = new Farm();
         farm.setName(name);
         farm.setDescription(description);
@@ -50,13 +52,13 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void addUser(Farm farm, User worker) throws IllegalAccessException {
+    public void addUser(Farm farm, User worker) {
         if (farm
                 .getUsers()
                 .stream()
                 .anyMatch(farmUser -> Objects.equals(farmUser.getUser().getId(), worker.getId()))
         )
-            throw new IllegalArgumentException("User is already in the farm.");
+            throw new ResponseException("User is already in the farm.");
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -73,10 +75,10 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public Farm get(Long id) throws IllegalAccessException {
+    public Farm get(Long id) {
         var farm = farmRepository.findById(id);
         if (farm.isEmpty())
-            throw new IllegalArgumentException("Farm doesn't exist.");
+            throw new ResponseException("Farm doesn't exist.", HttpStatus.NOT_FOUND);
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm.get(), authenticationUtils.getAuthentication()
         );
@@ -86,11 +88,11 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void update(Farm farm, String name, String description) throws IllegalAccessException {
+    public void update(Farm farm, String name, String description) {
         if (name == null || description == null || name.length() == 0)
-            throw new IllegalArgumentException("Invalid data.");
+            throw new ResponseException("Invalid data.");
         if (farmRepository.findByName(name).isPresent())
-            throw new IllegalArgumentException("Name is already used.");
+            throw new ResponseException("Name is already used.");
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -105,7 +107,7 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void updateUserRole(Farm farm, User user, FarmUser.UserRole role) throws IllegalAccessException {
+    public void updateUserRole(Farm farm, User user, FarmUser.UserRole role) {
         var authFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -128,7 +130,7 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void removeUser(Farm farm, User user) throws IllegalAccessException {
+    public void removeUser(Farm farm, User user) {
         var authFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -149,7 +151,7 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public void deleteFarm(Farm farm) throws IllegalAccessException {
+    public void deleteFarm(Farm farm) {
         var authFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );

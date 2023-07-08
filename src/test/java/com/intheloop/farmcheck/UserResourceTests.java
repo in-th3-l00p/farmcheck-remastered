@@ -39,4 +39,6 @@ public class UserResourceTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("{\"id\":1,\"username\":\"user\",\"firstName\":\"user\",\"lastName\":\"user\",\"email\":\"user@email.com\"}"));
     }
+
+    // todo: create more tests
 }

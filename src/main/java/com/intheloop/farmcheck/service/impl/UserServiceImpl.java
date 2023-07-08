@@ -6,7 +6,9 @@ import com.intheloop.farmcheck.repository.AuthorityRepository;
 import com.intheloop.farmcheck.repository.UserRepository;
 import com.intheloop.farmcheck.security.PasswordEncoder;
 import com.intheloop.farmcheck.service.UserService;
+import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -44,13 +46,13 @@ public class UserServiceImpl implements UserService {
                 username.isEmpty() ||
                 firstName.isEmpty() ||
                 lastName.isEmpty())
-            throw new IllegalArgumentException("Invalid data");
+            throw new ResponseException("Invalid data");
         if (userRepository.existsByUsername(username))
-            throw new IllegalArgumentException("Username is already used.");
+            throw new ResponseException("Username is already used.");
         if (userRepository.existsByEmail(email))
-            throw new IllegalArgumentException("Email address is already used.");
+            throw new ResponseException("Email address is already used.");
         if (password.length() < 8)
-            throw new IllegalArgumentException("Password should be longer then 8 characters.");
+            throw new ResponseException("Password should be longer then 8 characters.");
         var encodedPassword = passwordEncoder.encode(password);
         var user = new User();
         user.setUsername(username);
@@ -71,7 +73,7 @@ public class UserServiceImpl implements UserService {
     public User get(Long id) {
         var user = userRepository.findById(id);
         if (user.isEmpty())
-            throw new IllegalArgumentException("User not found.");
+            throw new ResponseException("User not found.", HttpStatus.NOT_FOUND);
         return user.get();
     }
 
@@ -79,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public User get(String username) {
         var user = userRepository.findByUsername(username);
         if (user.isEmpty())
-            throw new IllegalArgumentException("User not found.");
+            throw new ResponseException("User not found.", HttpStatus.NOT_FOUND);
         return user.get();
     }
 
@@ -94,9 +96,9 @@ public class UserServiceImpl implements UserService {
                 user.getUsername().isEmpty() ||
                 user.getFirstName().isEmpty() ||
                 user.getLastName().isEmpty())
-            throw new IllegalArgumentException("Invalid data");
+            throw new ResponseException("Invalid data");
         if (userRepository.existsByUsername(user.getUsername()))
-            throw new IllegalArgumentException("Username is already used.");
+            throw new ResponseException("Username is already used.");
         userRepository.save(user);
     }
 }
