@@ -26,6 +26,9 @@ public class Farm {
     @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
     private Set<FarmUser> users = new HashSet<>();
 
+    @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
+    private Set<Task> tasks = new HashSet<>();
+
     public Farm() {
     }
 
@@ -67,5 +70,13 @@ public class Farm {
 
     public void setUsers(Set<FarmUser> users) {
         this.users = users;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 }

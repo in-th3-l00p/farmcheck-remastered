@@ -52,6 +52,12 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<FarmUser> farms = new HashSet<>();
 
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL)
+    private Set<Task> createdTasks = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<TaskUser> tasks = new HashSet<>();
+
     public User() {
     }
 
@@ -187,6 +193,22 @@ public class User implements UserDetails {
 
     public void setFarms(Set<FarmUser> farms) {
         this.farms = farms;
+    }
+
+    public Set<Task> getCreatedTasks() {
+        return createdTasks;
+    }
+
+    public void setCreatedTasks(Set<Task> createdTasks) {
+        this.createdTasks = createdTasks;
+    }
+
+    public Set<TaskUser> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TaskUser> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
