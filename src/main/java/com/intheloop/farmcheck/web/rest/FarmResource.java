@@ -5,6 +5,7 @@ import com.intheloop.farmcheck.service.FarmService;
 import com.intheloop.farmcheck.service.UserService;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.FarmDTO;
+import com.intheloop.farmcheck.web.rest.dto.UserRoleDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class FarmResource {
     /**
      * {@code GET /api/v1/farm} : Gets the details of a farm
      * @param farmId : the farm's id
-     * @return a {@link FarmDTO} with status {@code 200 (OK)}, or {@code 400 (BAD REQUEST)} if an error occurred
+     * @return a {@link FarmDTO} with status {@code 200 (OK)}
      */
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -40,9 +41,55 @@ public class FarmResource {
     }
 
     /**
+     * {@code GET /api/v1/farm/all} : Gets the current user's farms
+     * @param page : used for pagination
+     * @return a {@link java.util.List<FarmDTO>} with status {@code 200 (OK)}
+     */
+    @GetMapping(
+            path = "/all",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getFarms(@RequestParam(value = "page", defaultValue = "0") int page) {
+        try {
+            return ResponseEntity.ok(farmService
+                    .getCurrentUserFarms(page)
+                    .stream()
+                    .map(FarmDTO::new)
+                    .toList());
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
+     * {@code GET /api/v1/farm/users} : Gets farm's users
+     * @param farmId : the id of the farm
+     * @param page : used for pagination
+     * @return a {@link java.util.List<UserRoleDTO>} with status {@code 200 (OK)}
+     */
+    @GetMapping(
+            path = "/users",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getFarmUsers(
+            @RequestParam("farmId") Long farmId,
+            @RequestParam(value = "page", defaultValue = "0") int page
+            ) {
+        try {
+            return ResponseEntity.ok(farmService
+                    .getFarmUsers(farmId, page)
+                    .stream()
+                    .map(farmUser -> new UserRoleDTO(farmUser.getUser(), farmUser.getUserRole()))
+                    .toList());
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code POST /api/v1/farm} : Creates a farm
      * @param farmDTO : the farm's details
-     * @return status {@code 200 (OK)} if the farm was created successfully, or {@code 400 (BAD REQUEST)} if an error occurred
+     * @return status {@code 200 (OK)} if the farm was created successfully
      */
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -61,7 +108,7 @@ public class FarmResource {
      * {@code POST /api/v1/farm/user} : Adds a user to a farm, with default WORKER role
      * @param farmId : the farm's id
      * @param userId : the user's id
-     * @return status {@code 200 (OK)} if the user was added, or {@code 400 (BAD REQUEST)} if an error occurred
+     * @return status {@code 200 (OK)} if the user was added
      */
     @PostMapping(
             path = "/user",
@@ -83,7 +130,7 @@ public class FarmResource {
      * {@code PUT /api/v1/farm} : Updates farm's details
      * @param farmId : the farm's id
      * @param farmDTO : the farm's details
-     * @return status {@code 200 (OK)} if the details were updated, or {@code 400 (BAD REQUEST)} if an error occurred
+     * @return status {@code 200 (OK)} if the details were updated
      */
     @PutMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -110,7 +157,7 @@ public class FarmResource {
      * @param farmId : the farm's id
      * @param userId : the user's id
      * @param userRole : user's new role
-     * @return status {@code 200 (OK)} if the user's role was updated, or {@code 400 (BAD_REQUEST)} if the operation failed
+     * @return status {@code 200 (OK)} if the user's role was updated
      */
     @PutMapping(
             path = "/user",
@@ -136,7 +183,7 @@ public class FarmResource {
     /**
      * {@code DELETE /api/v1/farm} : Deletes a farm
      * @param farmId : the farm's id
-     * @return status {@code 200 (OK)} if the farm was deleted, or status {@code 400 (BAD REQUEST)} if the operation failed
+     * @return status {@code 200 (OK)} if the farm was deleted
      */
     @DeleteMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
@@ -154,7 +201,7 @@ public class FarmResource {
      * {@code DELETE /api/v1/farm/user} : Deletes a farm user
      * @param farmId : the farm's id
      * @param userId : the user's id
-     * @return status {@code 200 (OK)} if the user was deleted, or status {@code 400 (BAD REQUEST)} if the operation failed
+     * @return status {@code 200 (OK)} if the user was deleted
      */
     @DeleteMapping(
             path = "/user",

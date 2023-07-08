@@ -7,10 +7,13 @@ import com.intheloop.farmcheck.repository.FarmRepository;
 import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.FarmService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Service
@@ -85,6 +88,23 @@ public class FarmServiceImpl implements FarmService {
         if (currentFarmUser.isEmpty())
             throw UNAUTHORIZED;
         return farm.get();
+    }
+
+    @Override
+    public Collection<FarmUser> getFarmUsers(Long id, int page) {
+        var farm = this.get(id);
+        return farmUserRepository.findAllByFarm(
+                farm,
+                PageRequest.of(page, Constants.PAGE_SIZE)
+        );
+    }
+
+    @Override
+    public Collection<Farm> getCurrentUserFarms(int page) {
+        return farmUserRepository.findAllByUser(
+                authenticationUtils.getAuthentication(),
+                PageRequest.of(page, Constants.PAGE_SIZE)
+        ).stream().map(FarmUser::getFarm).toList();
     }
 
     @Override
