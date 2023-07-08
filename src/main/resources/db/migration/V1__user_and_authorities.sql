@@ -24,6 +24,7 @@ CREATE TABLE users
     account_non_expired     BOOLEAN                                 NOT NULL,
     account_non_locked      BOOLEAN                                 NOT NULL,
     credentials_non_expired BOOLEAN                                 NOT NULL,
+    created_at              DATE                                    NOT NULL,
     CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
@@ -51,3 +52,25 @@ ALTER TABLE users_authorities
 
 ALTER TABLE users_authorities
     ADD CONSTRAINT fk_useaut_on_user FOREIGN KEY (user_id) REFERENCES users (id);
+
+/* inserting defaults */
+INSERT INTO authorities (authority) VALUES ('user');
+INSERT INTO authorities (authority) VALUES ('admin');
+
+INSERT INTO users
+    (username, first_name, last_name, email, password, enabled, account_non_expired, account_non_locked, credentials_non_expired, created_at)
+VALUES
+    ('user', 'user', 'user', 'user@email.com', '$2a$10$COl0Wr4q2LJ0WZNo.SOqGuWdOWRCvw7srmdjwhvBW0BuiNjjP7pEm', true, true, true, true, now());
+INSERT INTO users_authorities(user_id, authorities_id) VALUES (
+    (SELECT id FROM users WHERE username='user'),
+    (SELECT id FROM authorities WHERE authority='user')
+);
+
+INSERT INTO users
+    (username, first_name, last_name, email, password, enabled, account_non_expired, account_non_locked, credentials_non_expired, created_at)
+VALUES
+    ('admin', 'admin', 'admin', 'admin@email.com', '$2a$10$tN4.kfda/ezxPuue/4StsuG0KnpyE5nqYkxNW7vcMh3buMr1lp4Vu', true, true, true, true, now());
+INSERT INTO users_authorities(user_id, authorities_id) VALUES (
+    (SELECT id FROM users WHERE username='admin'),
+    (SELECT id FROM authorities WHERE authority='admin')
+);
