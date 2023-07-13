@@ -25,7 +25,7 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)
     private LocalDateTime deadline;
@@ -43,6 +43,15 @@ public class Task {
     private Set<TaskUser> taskUsers = new HashSet<>();
 
     public Task() {
+    }
+
+    public Task(String name, String description, LocalDateTime deadline, Boolean important, User creator, Farm farm) {
+        this.name = name;
+        this.description = description;
+        this.deadline = deadline;
+        this.important = important;
+        this.creator = creator;
+        this.farm = farm;
     }
 
     public Long getId() {

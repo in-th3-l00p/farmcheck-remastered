@@ -33,6 +33,11 @@ public class TaskUser {
     public TaskUser() {
     }
 
+    public TaskUser(User user, Task task) {
+        this.user = user;
+        this.task = task;
+    }
+
     public Long getId() {
         return id;
     }

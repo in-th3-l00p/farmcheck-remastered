@@ -55,3 +55,16 @@ INSERT INTO farm_users(user_id, farm_id, user_role, created_at) VALUES (
     (SELECT id FROM farms WHERE name='User shared farm'),
     0,
     now());
+
+INSERT INTO farms (name, description, created_at)
+VALUES ('Admin shared farm', 'Farm created by the admin, shared with user', now());
+INSERT INTO farm_users(user_id, farm_id, user_role, created_at) VALUES (
+                                                                           (SELECT id FROM users WHERE username='admin'),
+                                                                           (SELECT id FROM farms WHERE name='Admin shared farm'),
+                                                                           2,
+                                                                           now());
+INSERT INTO farm_users(user_id, farm_id, user_role, created_at) VALUES (
+                                                                           (SELECT id FROM users WHERE username='user'),
+                                                                           (SELECT id FROM farms WHERE name='Admin shared farm'),
+                                                                           0,
+                                                                           now());

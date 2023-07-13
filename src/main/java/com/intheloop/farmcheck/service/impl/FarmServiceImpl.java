@@ -18,9 +18,9 @@ import java.util.Objects;
 
 @Service
 public class FarmServiceImpl implements FarmService {
-    private static final ResponseException UNAUTHORIZED =
+    public static final ResponseException UNAUTHORIZED =
             new ResponseException("You are not authorized to this farm.", HttpStatus.UNAUTHORIZED);
-    private static final ResponseException NOT_IN_FARM =
+    public static final ResponseException NOT_IN_FARM =
             new ResponseException("User is not in the farm.", HttpStatus.NOT_FOUND);
     private final FarmRepository farmRepository;
     private final FarmUserRepository farmUserRepository;

@@ -33,10 +33,7 @@ ALTER TABLE task_user
 ALTER TABLE task_user
     ADD CONSTRAINT FK_TASK_USER_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
 
-ALTER TABLE authorities_users
-    DROP CONSTRAINT fk_autuse_on_authority;
-
-ALTER TABLE authorities_users
-    DROP CONSTRAINT fk_autuse_on_user;
-
-DROP TABLE authorities_users CASCADE;
+INSERT INTO tasks(name, description, created_at, deadline, important, creator_id, farm_id)
+    VALUES ('Task 1', 'Description 1', now(), now(), TRUE, 2, 4);
+INSERT INTO task_user(completed, completed_at, user_id, task_id)
+    VALUES (FALSE, null, 1, 1);
