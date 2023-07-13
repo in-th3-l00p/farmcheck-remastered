@@ -75,7 +75,7 @@ public class UserResource {
     }
 
     /**
-     * {@code POST /api/v1/users/register} : Registers a new user
+     * {@code POST /api/v1/user/register} : Registers a new user
      * @param registerBody - the object containing user's data
      * @return {@code 200 (OK)} if the credentials are valid, else {@code 400 (BAD REQUEST)}
      */
