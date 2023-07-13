@@ -82,7 +82,7 @@ public class UserResource {
     @PostMapping(
             path = "/register",
             consumes = { MediaType.APPLICATION_JSON_VALUE },
-            produces = { MediaType.TEXT_PLAIN_VALUE }
+            produces = { MediaType.APPLICATION_JSON_VALUE }
     )
     public ResponseEntity<?> register(@RequestBody RegisterBody registerBody) {
         try {
@@ -97,6 +97,6 @@ public class UserResource {
         } catch (ResponseException e) {
             return e.toResponseEntity();
         }
-        return ResponseEntity.ok("Account registered.");
+        return ResponseEntity.ok().build();
     }
 }
