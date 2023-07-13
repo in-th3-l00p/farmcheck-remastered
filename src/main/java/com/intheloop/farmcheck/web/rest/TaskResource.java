@@ -94,6 +94,7 @@ public class TaskResource { // todo: unit test it
      * @param farmId : the farm id
      * @param page : the page number
      * @return status {@code 200 (OK)} and a list of tasks if the request was successful
+     * todo: fix paging bug
      */
     @GetMapping(
             value = "/farm",
