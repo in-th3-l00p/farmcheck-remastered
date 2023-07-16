@@ -2,7 +2,7 @@
 
 ###### Carrots are a cool-season crop grown in spring. They are an excellent source of vitamin A and add color to a meal. They can be served cooked or raw.
 
----
+###### ‎
 
 #### Informations:
 
@@ -12,7 +12,7 @@
 -   ###### Light: 6-10 hours of sun
 -   ###### Harvest time: 10-12 weeks
 
----
+###### ‎
 
 #### How to plant
 

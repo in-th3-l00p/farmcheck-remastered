@@ -2,17 +2,17 @@
 
 ###### Barley is a cereal grain that people can use in bread, beverages, stews, and other dishes. As a whole grain, barley provides fiber, vitamins, and minerals. These offer various health benefits.
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early spring
-- ###### Soil temperature: above 0°C
-- ###### Soil type: Fertile loam soil
-- ###### Light: 6 hours of sun per day
-- ###### Harvest time: 90 days
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: above 0°C
+-   ###### Soil type: Fertile loam soil
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 90 days
 
----
+###### ‎
 
 #### How to plant
 

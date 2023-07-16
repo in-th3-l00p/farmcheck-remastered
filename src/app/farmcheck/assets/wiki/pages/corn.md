@@ -2,17 +2,17 @@
 
 ###### Sweet corn is a tender, warm-season annual crop that produces ears of yellow, white, or bi-colored kernels
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early spring
-- ###### Soil temperature: 16-18°C
-- ###### Soil type: Well-drained but consistently moist
-- ###### Light: 6-8 hours of sun per day
-- ###### Harvest time: 60-100 days
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: 16-18°C
+-   ###### Soil type: Well-drained but consistently moist
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 60-100 days
 
----
+###### ‎
 
 #### How to plant
 

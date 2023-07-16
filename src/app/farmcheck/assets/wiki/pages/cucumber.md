@@ -2,17 +2,17 @@
 
 ###### An easy-care vegetable that loves sun and water, cucumbers grow quickly as long as they receive consistent watering and warmth.
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early-mid spring
-- ###### Soil temperature: 21°C
-- ###### Soil type: Fertile, well-drained
-- ###### Light: 6-8 hours of sun per day
-- ###### Harvest time: 50-70 days
+-   ###### Best time to plant: Early-mid spring
+-   ###### Soil temperature: 21°C
+-   ###### Soil type: Fertile, well-drained
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 50-70 days
 
----
+###### ‎
 
 #### How to plant
 

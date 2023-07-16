@@ -2,17 +2,17 @@
 
 ###### Broccoli is a cool-season vegetable planted in spring. The deliciously tender spears of garden-grown broccoli are also incredibly good for you—the “crown jewel of nutrition.”
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Mid-spring
-- ###### Soil temperature: Above 4°C
-- ###### Soil type: Well-drained, moist, fertile
-- ###### Light: 6-8 hours of sun per day
-- ###### Harvest time: 2-3 months
+-   ###### Best time to plant: Mid-spring
+-   ###### Soil temperature: Above 4°C
+-   ###### Soil type: Well-drained, moist, fertile
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 2-3 months
 
----
+###### ‎
 
 #### How to plant
 

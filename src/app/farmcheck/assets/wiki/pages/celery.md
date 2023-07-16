@@ -2,17 +2,17 @@
 
 ###### Not only is garden celery better-tasting than store-bought types, but it’s also less chemical-laden. In cooler regions, it does best planted in the early spring. In warmer areas, plan to plant in mid- to later summer.
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early-mid spring
-- ###### Soil temperature: 15-21°C
-- ###### Soil type: Nutrient-rich
-- ###### Light: 6-8 hours of sun per day
-- ###### Harvest time: 140 days
+-   ###### Best time to plant: Early-mid spring
+-   ###### Soil temperature: 15-21°C
+-   ###### Soil type: Nutrient-rich
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 140 days
 
----
+###### ‎
 
 #### How to plant
 

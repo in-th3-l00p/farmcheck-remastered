@@ -2,17 +2,17 @@
 
 ###### Radishes are an annual root vegetable and a member of the Brassicaceae or cabbage family, which includes broccoli, cabbage, cauliflower, kale, collards, and, as the name suggests, horseradish. The entire plant is edible—from root to leaves—and can be enjoyed raw or cooked.
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Late autumn - early spring
-- ###### Soil temperature: 5°C
-- ###### Soil type: Rock free soil
-- ###### Light: 6 hours of sun per day
-- ###### Harvest time: 3 weeks
+-   ###### Best time to plant: Late autumn - early spring
+-   ###### Soil temperature: 5°C
+-   ###### Soil type: Rock free soil
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 3 weeks
 
----
+###### ‎
 
 #### How to plant
 

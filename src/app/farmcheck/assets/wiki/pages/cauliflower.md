@@ -2,17 +2,17 @@
 
 ###### Cauliflower is a sun-loving, cool-season crop to grow in spring and fall. An annual plant in the Brassica family, cauliflower’s edible white flesh is extremely healthy and considered a “superfood.”
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early-mid fall
-- ###### Soil temperature: 15°C
-- ###### Soil type: Very rich in organic matter
-- ###### Light: 6-8 hours of sun per day
-- ###### Harvest time: 50-100 days
+-   ###### Best time to plant: Early-mid fall
+-   ###### Soil temperature: 15°C
+-   ###### Soil type: Very rich in organic matter
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 50-100 days
 
----
+###### ‎
 
 #### How to plant
 

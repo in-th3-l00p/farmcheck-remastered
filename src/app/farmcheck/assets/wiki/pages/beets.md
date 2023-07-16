@@ -2,17 +2,17 @@
 
 ###### A staple in our gardens, beets grow easily, and you won’t have to wait long to harvest their tasty roots. You can eat their green tops, too, so they’re a dual-purpose crop!
 
----
+###### ‎
 
 #### Informations:
 
-- ###### Best time to plant: Early spring
-- ###### Soil temperature: Above 10°C
-- ###### Soil type: Well-prepared, fertile
-- ###### Light: 6 hours of sun per day
-- ###### Harvest time: 55-70 days
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: Above 10°C
+-   ###### Soil type: Well-prepared, fertile
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 55-70 days
 
----
+###### ‎
 
 #### How to plant
 
