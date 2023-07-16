@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Late spring - early summer
-- ##### Soil temperature: 20-25°C
-- ##### Soil type: Well-drained, moist
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 75-100 days
+- ###### Best time to plant: Late spring - early summer
+- ###### Soil temperature: 20-25°C
+- ###### Soil type: Well-drained, moist
+- ###### Light: 6 hours of sun per day
+- ###### Harvest time: 75-100 days
 
 ---
 

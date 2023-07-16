@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Late winter - early spring
-- ##### Soil temperature: 15-16°C
-- ##### Soil type: Consistent moisture
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: Late july - early August
+- ###### Best time to plant: Late winter - early spring
+- ###### Soil temperature: 15-16°C
+- ###### Soil type: Consistent moisture
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: Late july - early August
 
 ---
 

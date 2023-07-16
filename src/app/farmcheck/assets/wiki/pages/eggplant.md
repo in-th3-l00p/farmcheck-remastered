@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Late spring
-- ##### Soil temperature: 21-30°C
-- ##### Soil type: Sandy loam soil, fairly high in organic matter
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 65-80 days
+- ###### Best time to plant: Late spring
+- ###### Soil temperature: 21-30°C
+- ###### Soil type: Sandy loam soil, fairly high in organic matter
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: 65-80 days
 
 ---
 

@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Early summer
-- ##### Soil temperature: 18-35°C
-- ##### Soil type: Nutrient rich
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 75-100 days
+- ###### Best time to plant: Early summer
+- ###### Soil temperature: 18-35°C
+- ###### Soil type: Nutrient rich
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: 75-100 days
 
 ---
 

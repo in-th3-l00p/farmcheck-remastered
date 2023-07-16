@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: 7°C
-- ##### Soil type: Rich, slightly acidic, well draining soil
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: early-mid summer
+- ###### Best time to plant: Early spring
+- ###### Soil temperature: 7°C
+- ###### Soil type: Rich, slightly acidic, well draining soil
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: early-mid summer
 
 ---
 

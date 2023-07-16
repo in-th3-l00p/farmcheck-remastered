@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Late autumn - early spring
-- ##### Soil temperature: 5°C
-- ##### Soil type: Rock free soil
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 3 weeks
+- ###### Best time to plant: Late autumn - early spring
+- ###### Soil temperature: 5°C
+- ###### Soil type: Rock free soil
+- ###### Light: 6 hours of sun per day
+- ###### Harvest time: 3 weeks
 
 ---
 

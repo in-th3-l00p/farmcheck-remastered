@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Mid-fall
-- ##### Soil temperature: Above 4°C
-- ##### Soil type: Well-drained
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: Early-mid summer
+- ###### Best time to plant: Mid-fall
+- ###### Soil temperature: Above 4°C
+- ###### Soil type: Well-drained
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: Early-mid summer
 
 ---
 

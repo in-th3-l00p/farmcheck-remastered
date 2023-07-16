@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Spring - early summer
-- ##### Soil temperature: 7-13°C
-- ##### Soil type: Fertile, loose, well-drained
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 14-21 days after they stop flowering
+- ###### Best time to plant: Spring - early summer
+- ###### Soil temperature: 7-13°C
+- ###### Soil type: Fertile, loose, well-drained
+- ###### Light: 6 hours of sun per day
+- ###### Harvest time: 14-21 days after they stop flowering
 
 ---
 

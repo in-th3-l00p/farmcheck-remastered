@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: 18°C
-- ##### Soil type: Balance between sandy and loamy
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 60-90 days
+- ###### Best time to plant: Early spring
+- ###### Soil temperature: 18°C
+- ###### Soil type: Balance between sandy and loamy
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: 60-90 days
 
 ---
 

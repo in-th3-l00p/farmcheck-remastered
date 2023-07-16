@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Mid-summer
-- ##### Soil temperature: 5-15°C
-- ##### Soil type: Fertile soil
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: Mid-late Autumn
+- ###### Best time to plant: Mid-summer
+- ###### Soil temperature: 5-15°C
+- ###### Soil type: Fertile soil
+- ###### Light: 6 hours of sun per day
+- ###### Harvest time: Mid-late Autumn
 
 ---
 

@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Late spring
-- ##### Soil temperature: Above 9°C
-- ##### Soil type: Well-drained, normal fertility and neutral acidity
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 50-65 days
+- ###### Best time to plant: Late spring
+- ###### Soil temperature: Above 9°C
+- ###### Soil type: Well-drained, normal fertility and neutral acidity
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: 50-65 days
 
 ---
 

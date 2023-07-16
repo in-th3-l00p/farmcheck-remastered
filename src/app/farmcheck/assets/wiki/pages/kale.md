@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: Above 4°C
-- ##### Soil type: Fertile, well-drained
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 55-75 days
+- ###### Best time to plant: Early spring
+- ###### Soil temperature: Above 4°C
+- ###### Soil type: Fertile, well-drained
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: 55-75 days
 
 ---
 

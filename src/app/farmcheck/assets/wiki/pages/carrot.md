@@ -6,11 +6,11 @@
 
 #### Informations:
 
--   ##### Best time to plant: Late spring to mid-summer
--   ##### Soil Temperature: 13-18°C
--   ##### Soil type: Free-draining
--   ##### Light: 6-10 hours of sun
--   ##### Harvest time: 10-12 weeks
+-   ###### Best time to plant: Late spring to mid-summer
+-   ###### Soil Temperature: 13-18°C
+-   ###### Soil type: Free-draining
+-   ###### Light: 6-10 hours of sun
+-   ###### Harvest time: 10-12 weeks
 
 ---
 

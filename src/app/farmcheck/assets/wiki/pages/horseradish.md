@@ -6,11 +6,11 @@
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: 15-18°C
-- ##### Soil type: Moist, fertile, loamy soil
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: Late october
+- ###### Best time to plant: Early spring
+- ###### Soil temperature: 15-18°C
+- ###### Soil type: Moist, fertile, loamy soil
+- ###### Light: 6-8 hours of sun per day
+- ###### Harvest time: Late october
 
 ---
 
