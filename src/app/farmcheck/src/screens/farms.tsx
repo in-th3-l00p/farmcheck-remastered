@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import Button from "../components/button";
 import ErrorText from "../components/errorText";
@@ -7,28 +7,34 @@ import FarmElement from "../components/farmElement";
 import Grid from "../components/grid";
 import Input from "../components/input";
 import Modal from "../components/modal";
+import PageController from "../components/pageController";
 import Text from "../components/text";
 import { AuthContext } from "../context/authContext";
 import { FarmContext } from "../context/farmContext";
+import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
+import Loading from "./loading";
 
-const Farms = () => {
+const Farms = ({ navigation }: { navigation: any }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [farmName, setFarmName] = useState("");
     const [farmDescription, setFarmDescription] = useState("");
     const [error, setError] = useState<string>("");
     const [farms, setFarms] = useState<any>([]);
     const [farmCreated, setFarmCreated] = useState(false);
+    const [page, setPage] = useState(0);
 
     const { create, getAll } = useContext(FarmContext);
     const { userToken }: any = useContext(AuthContext);
 
     useEffect(() => {
-        getAll(userToken).then((res: any) => {
+        getAll(userToken, page).then((res: any) => {
             setFarmCreated(false);
             setFarms(res);
         });
-    }, [farmCreated]);
+    }, [farmCreated, page]);
+
+    if (farms.length === 0) return <Loading />;
 
     return (
         <View
@@ -60,9 +66,9 @@ const Farms = () => {
                     </Grid>
                 </View>
 
-                <ScrollView style={styles.scroll} overScrollMode="never">
+                <View style={{ width: "100%" }}>
                     <View style={{ alignItems: "center" }}>
-                        {farms.length < 0 ? (
+                        {farms.length === 0 ? (
                             <View>
                                 <Text>
                                     You have no farms yet. Click the plus icon
@@ -71,13 +77,32 @@ const Farms = () => {
                             </View>
                         ) : (
                             <View>
-                                {farms.map((farm: any, index: any) => (
-                                    <FarmElement farm={farm} key={index} />
-                                ))}
+                                {farms.map(
+                                    (farm: any, index: any) =>
+                                        index < 5 && (
+                                            <TouchableOpacity
+                                                key={index}
+                                                activeOpacity={ActiveOpacity}
+                                                onPress={() =>
+                                                    navigation.navigate(
+                                                        "FarmWindow",
+                                                        {
+                                                            farm: farm,
+                                                        }
+                                                    )
+                                                }>
+                                                <FarmElement
+                                                    farm={farm}
+                                                    key={index}
+                                                />
+                                            </TouchableOpacity>
+                                        )
+                                )}
                             </View>
                         )}
                     </View>
-                </ScrollView>
+                </View>
+                <PageController max={0} page={page} setPage={setPage} />
             </View>
 
             <Modal visible={modalVisible} setVisible={setModalVisible}>

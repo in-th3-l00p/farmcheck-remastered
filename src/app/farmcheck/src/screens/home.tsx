@@ -10,6 +10,7 @@ import Text from "../components/text";
 import { AuthContext } from "../context/authContext";
 import { FarmContext } from "../context/farmContext";
 import { theme } from "../util/theme";
+import Loading from "./loading";
 
 const Home = () => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -19,6 +20,8 @@ const Home = () => {
 
     const { create } = useContext(FarmContext);
     const { userInfo, userToken }: any = useContext(AuthContext);
+
+    if (userInfo === null) return <Loading />;
 
     return (
         <View

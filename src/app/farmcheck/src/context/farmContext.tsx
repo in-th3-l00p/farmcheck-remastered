@@ -35,7 +35,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         });
     };
 
-    const getAll = (token: string) => {
+    const getAll = (token: string, page: number) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
@@ -43,6 +43,9 @@ export const FarmProvider = ({ children }: { children: any }) => {
                 .get(GetFarmsURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,
+                    },
+                    params: {
+                        page: page,
                     },
                 })
                 .then((response) => {

@@ -1,14 +1,18 @@
 import { Image, StyleSheet, View } from "react-native";
-import { getRandomColor } from "../util/utils";
+import { theme } from "../util/theme";
 import Text from "./text";
 
 const FarmElement = (farm: any) => {
     farm = farm.farm;
     return (
-        <View style={{ ...styles.container, borderColor: getRandomColor() }}>
+        <View
+            style={{
+                ...styles.container,
+                borderColor: theme().colors.secondary,
+            }}>
             <Image
                 style={styles.image}
-                source={require("../../assets/favicon.png")}
+                source={require("../../assets/images/defaultAdmin.png")}
             />
             <View
                 style={{
@@ -16,7 +20,7 @@ const FarmElement = (farm: any) => {
                     justifyContent: "center",
                     height: "100%",
                     marginLeft: 20,
-                    width: "75%",
+                    width: "60%",
                 }}>
                 <Text bold fontSize={16}>
                     {farm.name}
@@ -29,20 +33,21 @@ const FarmElement = (farm: any) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 90,
+        height: 95,
         borderRadius: 20,
-        borderWidth: 2,
+        borderWidth: 3,
         width: 320,
         padding: 20,
-        paddingHorizontal: 20,
+        paddingHorizontal: 12,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 20,
+        marginBottom: 15,
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
+        borderRadius: 12,
     },
 });
 

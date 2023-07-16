@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Searchbar } from "react-native-paper";
+import PageController from "../components/pageController";
 import Text from "../components/text";
 import WikiElement from "../components/wikiElement";
 import { loadData } from "../util/plants";
 import { theme } from "../util/theme";
+import Loading from "./loading";
 
 const Wiki = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [page, setPage] = useState(0);
+    const indexOnPage = 10;
 
-    const data = loadData();
+    const scrollVieRef = useRef<ScrollView>(null);
 
-    // console.log(loadedImages);
+    const data: any = loadData();
+
+    if (data.length === 0) return <Loading />;
 
     return (
         <View
@@ -38,23 +44,58 @@ const Wiki = () => {
                         }}
                     />
                 </View>
-                <ScrollView style={styles.scroll} overScrollMode="never">
+                <ScrollView
+                    ref={scrollVieRef}
+                    style={styles.scroll}
+                    overScrollMode="never">
                     <View style={styles.gridContainer}>
-                        {data.map(
-                            (plant: any, index: any) =>
-                                index < 20 &&
-                                plant.name.startsWith(
-                                    searchQuery.toLowerCase()
-                                ) && (
-                                    <WikiElement
-                                        key={index}
-                                        name={plant.name}
-                                        imgSrc={plant.image}
-                                        fileSrc={plant.file}
-                                    />
-                                )
+                        {data.map((plant: any, index: any) =>
+                            searchQuery !== ""
+                                ? plant.name.startsWith(
+                                      searchQuery.toLowerCase()
+                                  ) && (
+                                      <WikiElement
+                                          key={index}
+                                          name={plant.name}
+                                          imgSrc={plant.image}
+                                          file={plant.file}
+                                          heart={plant.heart}
+                                          //   setHeart={(heart: boolean) => {
+                                          //       data[index].heart = heart;
+                                          //       saveData(data);
+                                          //   }}
+                                      />
+                                  )
+                                : index < (page + 1) * indexOnPage &&
+                                  index >= page * indexOnPage && (
+                                      <WikiElement
+                                          key={index}
+                                          name={plant.name}
+                                          imgSrc={plant.image}
+                                          file={plant.file}
+                                          heart={plant.heart}
+                                          //   setHeart={(heart: boolean) => {
+                                          //       data[index].heart = heart;
+                                          //       saveData(data);
+                                          //   }}
+                                      />
+                                  )
                         )}
                     </View>
+
+                    {searchQuery === "" && (
+                        <PageController
+                            max={data.length / indexOnPage - 1}
+                            page={page}
+                            setPage={setPage}
+                            click={() => {
+                                scrollVieRef.current?.scrollTo({
+                                    y: 0,
+                                    animated: true,
+                                });
+                            }}
+                        />
+                    )}
                 </ScrollView>
             </View>
         </View>

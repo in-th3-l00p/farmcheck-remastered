@@ -99,6 +99,9 @@ const Login = ({ navigation }: { navigation: any }) => {
                         onPress={() => {
                             navigation.navigate("Register");
                             setShowError(false);
+                            setError("");
+                            setUsername("");
+                            setPassword("");
                         }}>
                         <Text
                             bold={true}

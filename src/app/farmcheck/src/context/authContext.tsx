@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
 
                     getUserInfo(response.data).catch((error) => {
                         console.log(error);
-                        throw error;
+                        reject(error);
                     });
 
                     resolve(response.data);
@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: { children: any }) => {
         email: string,
         password: string
     ) => {
-        console.log(username, firstName, lastName, email, password);
         return new Promise((resolve, reject) => {
             // setIsLoading(true);
 
@@ -58,14 +57,12 @@ export const AuthProvider = ({ children }: { children: any }) => {
                     password: password,
                 })
                 .then((response) => {
-                    // setUserInfo(response.data);
-                    // setUserToken(response.data.token);
-                    // AsyncStorage.setItem("userToken", response.data.token);
-                    // AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
                     resolve(response.data);
                     // setIsLoading(false);
                 })
                 .catch((error) => {
+                    console.log(error);
+                    console.log(error.response.data.message);
                     reject(error);
                     // setIsLoading(false);
                 });
@@ -84,7 +81,10 @@ export const AuthProvider = ({ children }: { children: any }) => {
                 })
                 .then((response) => {
                     setUserInfo(response.data);
-                    AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+                    AsyncStorage.setItem(
+                        "userInfo",
+                        JSON.stringify(response.data)
+                    );
                     resolve(response.data);
                     // setIsLoading(false);
                 })
@@ -105,12 +105,12 @@ export const AuthProvider = ({ children }: { children: any }) => {
     const isLoggedIn = async () => {
         try {
             setIsLoading(true);
-            let userInfo = await AsyncStorage.getItem("userInfo");
-            const userToken = await AsyncStorage.getItem("userToken");
-            userInfo = JSON.parse(userInfo === null ? "{}" : userInfo);
-            if (userInfo !== null) {
-                setUserInfo(userInfo);
-                setUserToken(userToken);
+            let userInfoRaw = await AsyncStorage.getItem("userInfo");
+            const userTokenRaw = await AsyncStorage.getItem("userToken");
+            userInfoRaw = JSON.parse(userInfoRaw || "{}");
+            if (userInfoRaw !== null) {
+                setUserInfo(userInfoRaw);
+                setUserToken(userTokenRaw);
             }
             setIsLoading(false);
         } catch (error) {
