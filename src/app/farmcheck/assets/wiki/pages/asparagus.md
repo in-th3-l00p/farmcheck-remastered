@@ -1,18 +1,16 @@
-### Asparagus
-
 ###### Asparagus is one of the first plants that greets us in springtime! It’s a perennial, which means that once it gets established, the tender spears will return year after year. In addition, its ferny foliage makes an excellent ornamental
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: Above 10°C
-- ##### Soil type: Well-drained, slightly acidic
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 2-3 years
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: Above 10°C
+-   ###### Soil type: Well-drained, slightly acidic
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 2-3 years
 
----
+###### ‎
 
 #### How to plant
 

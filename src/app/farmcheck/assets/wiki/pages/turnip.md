@@ -1,18 +1,16 @@
-### Turnips
-
 ###### Turnips can be eaten raw, baked, boiled, roasted, or mashed. Prepare turnips as you would carrots. Or, try them as an alternative to potatoes; we enjoy a turnip gratin.
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Late summer
-- ##### Soil temperature: 5-23°C
-- ##### Soil type: Well-drained 
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 6-10 weeks
+-   ###### Best time to plant: Late summer
+-   ###### Soil temperature: 5-23°C
+-   ###### Soil type: Well-drained
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 6-10 weeks
 
----
+###### ‎
 
 #### How to plant
 

@@ -1,18 +1,16 @@
-### Wheat 
-
 ###### Wheat is a grass widely cultivated for its seed, a cereal grain that is a worldwide staple food
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: 20-25°C
-- ##### Soil type: Clay loam soil
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 120 days
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: 20-25°C
+-   ###### Soil type: Clay loam soil
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 120 days
 
----
+###### ‎
 
 #### How to plant
 

@@ -1,18 +1,16 @@
-### Sweet potatoes
-
 ###### The sweet potato is a tropical plant and a member of the morning glory family. Compare a sweet potato vine’s foliage and flowers to those of a morning glory and you’ll see the family resemblance!
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Mid-late spring
-- ##### Soil temperature: 13-18°C
-- ##### Soil type: Well-drained
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 90-120 days
+-   ###### Best time to plant: Mid-late spring
+-   ###### Soil temperature: 13-18°C
+-   ###### Soil type: Well-drained
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 90-120 days
 
----
+###### ‎
 
 #### How to plant
 

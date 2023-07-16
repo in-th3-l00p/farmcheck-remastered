@@ -1,18 +1,16 @@
-## Carrot
-
 ###### Carrots are a cool-season crop grown in spring. They are an excellent source of vitamin A and add color to a meal. They can be served cooked or raw.
 
----
+###### ‎
 
 #### Informations:
 
--   ##### Best time to plant: Late spring to mid-summer
--   ##### Soil Temperature: 13-18°C
--   ##### Soil type: Free-draining
--   ##### Light: 6-10 hours of sun
--   ##### Harvest time: 10-12 weeks
+-   ###### Best time to plant: Late spring to mid-summer
+-   ###### Soil Temperature: 13-18°C
+-   ###### Soil type: Free-draining
+-   ###### Light: 6-10 hours of sun
+-   ###### Harvest time: 10-12 weeks
 
----
+###### ‎
 
 #### How to plant
 

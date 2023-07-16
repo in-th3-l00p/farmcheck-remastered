@@ -1,18 +1,16 @@
-### Pumpkins
-
 ###### Whether you use them for carving or cooking, pumpkins do not disappoint—if you have the space to grow them.
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Early summer
-- ##### Soil temperature: 18-35°C
-- ##### Soil type: Nutrient rich
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 75-100 days
+-   ###### Best time to plant: Early summer
+-   ###### Soil temperature: 18-35°C
+-   ###### Soil type: Nutrient rich
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 75-100 days
 
----
+###### ‎
 
 #### How to plant
 

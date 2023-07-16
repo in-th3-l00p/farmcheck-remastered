@@ -1,18 +1,16 @@
-### Swiss chard
-
 ###### It is a nutritional superfood, high in vitamins A, C, and K, as well as minerals, phytonutrients, and fiber. Plus, its rainbow of colors is beautiful!
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Early spring
-- ##### Soil temperature: 5-15°C
-- ##### Soil type: Well-drained, slightly acidic
-- ##### Light: 6 hours of sun per day
-- ##### Harvest time: 45-60 days
+-   ###### Best time to plant: Early spring
+-   ###### Soil temperature: 5-15°C
+-   ###### Soil type: Well-drained, slightly acidic
+-   ###### Light: 6 hours of sun per day
+-   ###### Harvest time: 45-60 days
 
----
+###### ‎
 
 #### How to plant
 

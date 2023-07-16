@@ -1,18 +1,16 @@
-### Eggplants
-
 ###### Eggplants—also known as aubergines or brinjals—are warm-weather vegetables that are harvested in mid- to late summer. Eggplants taste best when harvested young
 
----
+###### ‎
 
 #### Informations:
 
-- ##### Best time to plant: Late spring
-- ##### Soil temperature: 21-30°C
-- ##### Soil type: Sandy loam soil, fairly high in organic matter
-- ##### Light: 6-8 hours of sun per day
-- ##### Harvest time: 65-80 days
+-   ###### Best time to plant: Late spring
+-   ###### Soil temperature: 21-30°C
+-   ###### Soil type: Sandy loam soil, fairly high in organic matter
+-   ###### Light: 6-8 hours of sun per day
+-   ###### Harvest time: 65-80 days
 
----
+###### ‎
 
 #### How to plant
 
