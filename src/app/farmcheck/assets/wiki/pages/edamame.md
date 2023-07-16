@@ -1,5 +1,3 @@
-### Edamame
-
 ###### Originally from East Asia, edamame is a relatively new crop in North American gardens—especially for home gardeners.
 
 ###### ‎

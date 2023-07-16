@@ -1,5 +1,3 @@
-### Lettuce
-
 ###### If you haven’t tasted fresh homegrown lettuce, you’re missing out. It’s far superior in both taste and vitamin A content, to the store-bought alternative.
 
 ###### ‎

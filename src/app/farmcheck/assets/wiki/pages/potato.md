@@ -1,5 +1,3 @@
-### Potato
-
 ###### The potato (Solanum tuberosum) is a member of the nightshade family, which includes tomato, pepper, and eggplant. They can be grown as a winter crop in warmer climates.
 
 ###### ‎

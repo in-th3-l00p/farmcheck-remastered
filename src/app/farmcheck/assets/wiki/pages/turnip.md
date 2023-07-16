@@ -1,5 +1,3 @@
-### Turnips
-
 ###### Turnips can be eaten raw, baked, boiled, roasted, or mashed. Prepare turnips as you would carrots. Or, try them as an alternative to potatoes; we enjoy a turnip gratin.
 
 ###### ‎

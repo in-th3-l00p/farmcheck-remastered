@@ -1,5 +1,3 @@
-### Garlic
-
 ###### Growing your own garlic is always exciting. This pungent bulb adds flavor to countless recipes—and is so healthy!
 
 ###### ‎

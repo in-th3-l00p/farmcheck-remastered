@@ -1,5 +1,3 @@
-### Radishes
-
 ###### Radishes are an annual root vegetable and a member of the Brassicaceae or cabbage family, which includes broccoli, cabbage, cauliflower, kale, collards, and, as the name suggests, horseradish. The entire plant is edible—from root to leaves—and can be enjoyed raw or cooked.
 
 ###### ‎

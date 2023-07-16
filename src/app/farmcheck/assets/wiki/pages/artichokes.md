@@ -1,5 +1,3 @@
-### Artichokes
-
 ###### The buds (i.e., the “artichokes” that we harvest and eat), if allowed to flower, are thistle-like and violet. These large plants can be grown in rows in the garden, as informal hedges, or planted in a wide border. Artichokes can reach heights of 3 to 5 feet.
 
 ###### ‎

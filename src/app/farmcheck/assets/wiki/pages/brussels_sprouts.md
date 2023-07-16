@@ -1,5 +1,3 @@
-### Brussels sprouts
-
 ###### Brussels sprouts are a member of the cabbage family and an excellent source of nutrients
 
 ###### ‎

@@ -1,5 +1,3 @@
-### Spinach
-
 ###### Spinach has similar cool-season growing conditions and requirements as lettuce, but it is more versatile in both its nutrition and its ability to be eaten raw or cooked. It is higher in iron, calcium, and vitamins than most cultivated greens, and one of the best sources of vitamins A, B, and C.
 
 ###### ‎

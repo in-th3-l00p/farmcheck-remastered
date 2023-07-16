@@ -1,5 +1,3 @@
-### Eggplants
-
 ###### Eggplants—also known as aubergines or brinjals—are warm-weather vegetables that are harvested in mid- to late summer. Eggplants taste best when harvested young
 
 ###### ‎

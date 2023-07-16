@@ -1,5 +1,3 @@
-### Broccoli
-
 ###### Broccoli is a cool-season vegetable planted in spring. The deliciously tender spears of garden-grown broccoli are also incredibly good for you—the “crown jewel of nutrition.”
 
 ###### ‎

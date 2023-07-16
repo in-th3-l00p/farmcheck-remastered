@@ -1,5 +1,3 @@
-### Sweet potatoes
-
 ###### The sweet potato is a tropical plant and a member of the morning glory family. Compare a sweet potato vine’s foliage and flowers to those of a morning glory and you’ll see the family resemblance!
 
 ###### ‎

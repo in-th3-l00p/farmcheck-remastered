@@ -1,5 +1,3 @@
-### Zucchini
-
 ###### Zucchini is known to be staggeringly productive. But there are some pitfalls such as poor pollination and pests to avoid if you wish to have a prolific harvest
 
 ###### ‎

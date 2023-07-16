@@ -1,5 +1,3 @@
-### Canola
-
 ###### Canola is a profitable cropping option for many cropping regions of Victoria and it also brings diversity in terms of cropping rotations.
 
 ###### ‎

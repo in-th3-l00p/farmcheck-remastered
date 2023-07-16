@@ -1,5 +1,3 @@
-### Cauliflower
-
 ###### Cauliflower is a sun-loving, cool-season crop to grow in spring and fall. An annual plant in the Brassica family, cauliflower’s edible white flesh is extremely healthy and considered a “superfood.”
 
 ###### ‎

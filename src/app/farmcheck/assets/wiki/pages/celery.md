@@ -1,5 +1,3 @@
-### Celery
-
 ###### Not only is garden celery better-tasting than store-bought types, but it’s also less chemical-laden. In cooler regions, it does best planted in the early spring. In warmer areas, plan to plant in mid- to later summer.
 
 ###### ‎

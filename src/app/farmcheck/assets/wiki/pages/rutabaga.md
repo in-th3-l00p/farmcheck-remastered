@@ -1,5 +1,3 @@
-### Rutabagas
-
 ###### Rutabagas, also known as swedes, are root vegetables grown for both their softball-size golden roots and their greens
 
 ###### ‎

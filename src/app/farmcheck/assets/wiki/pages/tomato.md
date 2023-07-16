@@ -1,5 +1,3 @@
-### Tomatoes
-
 ###### Tomato plants are tender warm-season crops that love the sun and cannot bear frost
 
 ###### ‎

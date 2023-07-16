@@ -1,5 +1,3 @@
-### Parsnips
-
 ###### Parsnips are a hardy, cool-season crop planted in the spring, kissed by fall frost, and harvested before the ground freezes. Parsnips enrich soups and stews but can also be enjoyed as a side dish
 
 ###### ‎

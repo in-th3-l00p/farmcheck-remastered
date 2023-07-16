@@ -1,5 +1,3 @@
-### Winter squash
-
 ###### Growing winter squash requires some patience, but this garden vegetable is well worth the wait—and most varieties have a long shelf life after harvest
 
 ###### ‎
@@ -12,7 +10,7 @@
 -   ###### Light: 6 hours of sun per day
 -   ###### Harvest time: 75-100 days
 
----
+###### ‎
 
 #### How to plant
 

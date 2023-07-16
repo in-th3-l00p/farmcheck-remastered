@@ -1,5 +1,3 @@
-### Barley
-
 ###### Barley is a cereal grain that people can use in bread, beverages, stews, and other dishes. As a whole grain, barley provides fiber, vitamins, and minerals. These offer various health benefits.
 
 ###### ‎

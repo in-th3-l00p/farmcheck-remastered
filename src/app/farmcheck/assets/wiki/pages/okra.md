@@ -1,5 +1,3 @@
-### Okra
-
 ###### This plant not only grows edible vegetables and beautiful flowers, but also it is rich in vitamin A and low in calories, which makes it a great addition to your diet.
 
 ###### ‎

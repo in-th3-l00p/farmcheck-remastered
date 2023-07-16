@@ -1,5 +1,3 @@
-### Jalapeño peppers
-
 ###### Chili peppers, including jalapeños, are warm-weather vegetables which are fun to grow (and eat).
 
 ###### ‎

@@ -1,5 +1,3 @@
-### Swiss chard
-
 ###### It is a nutritional superfood, high in vitamins A, C, and K, as well as minerals, phytonutrients, and fiber. Plus, its rainbow of colors is beautiful!
 
 ###### ‎

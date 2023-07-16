@@ -1,5 +1,3 @@
-### Pumpkins
-
 ###### Whether you use them for carving or cooking, pumpkins do not disappoint—if you have the space to grow them.
 
 ###### ‎

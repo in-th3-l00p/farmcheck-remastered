@@ -1,5 +1,3 @@
-### Horseradish
-
 ###### An exceptionally hardy perennial, horseradish belongs to the venerable plant family Cruciferae, which includes cabbage, broccoli, cauliflower, brussels sprouts, among other commonly-grown vegetables.
 
 ###### ‎

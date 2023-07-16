@@ -1,5 +1,3 @@
-### Kohlrabi
-
 ###### Kohlrabi is a cool-season vegetable, often overlooked because of its strange, almost alien appearance. But this edible’s fast growth and great taste make kohlrabi something every gardener should try
 
 ###### ‎

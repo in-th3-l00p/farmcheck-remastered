@@ -1,5 +1,3 @@
-### Corn
-
 ###### Sweet corn is a tender, warm-season annual crop that produces ears of yellow, white, or bi-colored kernels
 
 ###### ‎

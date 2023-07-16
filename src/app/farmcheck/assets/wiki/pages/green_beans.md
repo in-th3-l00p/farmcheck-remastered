@@ -1,5 +1,3 @@
-### Green beans
-
 ###### Green beans are a staple of so many vegetable gardens because they are so easy to grow—even in limited space—and incredibly productive!
 
 ###### ‎

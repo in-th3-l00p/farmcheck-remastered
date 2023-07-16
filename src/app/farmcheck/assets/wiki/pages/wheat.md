@@ -1,5 +1,3 @@
-### Wheat
-
 ###### Wheat is a grass widely cultivated for its seed, a cereal grain that is a worldwide staple food
 
 ###### ‎

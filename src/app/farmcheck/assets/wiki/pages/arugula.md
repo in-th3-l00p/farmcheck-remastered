@@ -1,5 +1,3 @@
-### Arugula
-
 ###### Also known as “rocket” or “roquette,” arugula is a fast-growing, cool-season leafy green that adds a tangy, mustard-like flavor to salads
 
 ###### ‎

@@ -1,5 +1,3 @@
-### Peas
-
 ###### The sweet taste of glorious garden-grown peas is nothing like what you find in grocery stores. They are nature’s candy off the vine! Peas are one of the season’s first crops, planted as soon as the ground can be worked, even if snow falls afterwards
 
 ###### ‎

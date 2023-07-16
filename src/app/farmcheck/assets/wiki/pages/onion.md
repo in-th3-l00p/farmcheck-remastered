@@ -1,5 +1,3 @@
-### Onions
-
 ###### Onions are surprisingly easy to grow! They are planted early in the spring and harvested from midsummer through the fall
 
 ###### ‎

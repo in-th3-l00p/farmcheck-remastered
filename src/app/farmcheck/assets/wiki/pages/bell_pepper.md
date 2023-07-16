@@ -1,5 +1,3 @@
-### Bell peppers
-
 ###### Peppers are a warm-season crop and come in a variety of colors, shapes, and sizes. More good news: Most varieties resist common garden pests and diseases!
 
 ###### ‎

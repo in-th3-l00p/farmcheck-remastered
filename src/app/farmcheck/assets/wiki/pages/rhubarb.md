@@ -1,5 +1,3 @@
-### Rhubarb
-
 ###### This perennial vegetable has tart-flavored ruby or green stems used to make pies, crumbles, jams, and sauces.
 
 ###### ‎

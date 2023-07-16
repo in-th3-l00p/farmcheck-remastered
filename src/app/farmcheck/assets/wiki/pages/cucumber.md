@@ -1,5 +1,3 @@
-### Cucumbers
-
 ###### An easy-care vegetable that loves sun and water, cucumbers grow quickly as long as they receive consistent watering and warmth.
 
 ###### ‎

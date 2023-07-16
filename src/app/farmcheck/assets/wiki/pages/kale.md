@@ -1,5 +1,3 @@
-### Kale
-
 ###### Kale is one of the most nutritious vegetables you can grow. It’s crammed with vitamins and powerful antioxidants, and it tastes de-licious.
 
 ###### ‎

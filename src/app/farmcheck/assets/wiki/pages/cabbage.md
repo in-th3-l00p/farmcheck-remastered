@@ -1,5 +1,3 @@
-### Cabbage
-
 ###### Cabbage is a cool-season vegetable suited to both spring and fall which is packed with vitamins!
 
 ###### ‎
