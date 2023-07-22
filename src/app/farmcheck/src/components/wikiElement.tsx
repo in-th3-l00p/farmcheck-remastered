@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Markdown from "react-native-markdown-display";
 import { IconButton } from "react-native-paper";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
-import Button from "./button";
+import Grid from "./grid";
 import Modal from "./modal";
 import Text from "./text";
 
@@ -18,46 +18,22 @@ const rename = (name: string) => {
     return words.join(" ");
 };
 
-const getFile = async (
-    fileSrc: string,
-    setContent: (content: string) => void
-) => {
-    // try {
-    //     const asset = Asset.fromModule(
-    //         require("./assets/wiki/pages/potato.md")
-    //     );
-    //     await asset.downloadAsync();
-    //     const fileUri = asset.localUri || asset.uri;
-    //     const fileContent = await FileSystem.readAsStringAsync(fileUri);
-    //     console.log("File content:", fileContent);
-    // } catch (error) {
-    //     console.error("Error reading directories:", error);
-    // }
-};
-
 const WikiElement = ({
     name,
     imgSrc,
-    fileSrc,
+    file,
+    heart,
+    setHeart,
 }: {
     name: string;
     imgSrc: any;
-    fileSrc: string;
+    file: string;
+    heart: boolean;
+    setHeart?: any;
 }) => {
-    const [hearted, setHearted] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-    const [markdownContent, setMarkdownContent] = useState("");
 
     name = rename(name);
-
-    useEffect(() => {
-        const fetchMarkdownFile = async () => {
-            getFile(fileSrc, setMarkdownContent);
-            console.log(markdownContent);
-        };
-
-        fetchMarkdownFile();
-    }, [fileSrc]);
 
     return (
         <>
@@ -71,16 +47,16 @@ const WikiElement = ({
                     onPress={() => setModalVisible(true)}>
                     <View style={{ position: "relative" }}>
                         <Image source={imgSrc} style={styles.image} />
-                        <IconButton
-                            icon={hearted ? "heart" : "heart-outline"}
+                        {/* <IconButton
+                            icon={heart ? "heart" : "heart-outline"}
                             iconColor="red"
                             size={20}
                             onPress={() => {
-                                setHearted(!hearted);
+                                setHeart(!heart);
                             }}
                             style={styles.icon}
                             animated
-                        />
+                        /> */}
                     </View>
                     <Text style={{ marginBottom: 8 }} bold center>
                         {name}
@@ -88,10 +64,29 @@ const WikiElement = ({
                 </TouchableOpacity>
             </View>
 
-            <Modal visible={modalVisible} setVisible={setModalVisible}>
-                <Button text="Close" onPress={() => setModalVisible(false)} />
+            <Modal
+                visible={modalVisible}
+                setVisible={setModalVisible}
+                style={{ width: "90%" }}>
+                <Grid container style={{ marginBottom: 5 }}>
+                    <Grid size={10.5}>
+                        <Text bold>{name}</Text>
+                    </Grid>
+                    <Grid size={1.5}>
+                        <IconButton
+                            icon="close"
+                            iconColor={theme().colors.dark}
+                            size={24}
+                            style={styles.button}
+                            animated
+                            onPress={() => {
+                                setModalVisible(false);
+                            }}
+                        />
+                    </Grid>
+                </Grid>
                 {/*@ts-ignore */}
-                <Markdown>{markdownContent}</Markdown>
+                <Markdown>{file}</Markdown>
             </Modal>
         </>
     );
@@ -112,6 +107,11 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: -6,
         right: -5,
+    },
+    button: {
+        width: 35,
+        height: 35,
+        borderRadius: 50,
     },
 });
 

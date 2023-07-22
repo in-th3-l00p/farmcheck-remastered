@@ -169,20 +169,21 @@ const Register = ({ navigation }: { navigation: any }) => {
                                 lastName,
                                 email,
                                 password
-                            ).catch((err: any) => {
-                                setShowError(true);
-                                if (
-                                    err.message ===
-                                    "Request failed with status code 400"
-                                )
-                                    setError("Invalid email or password");
-                                else if (
-                                    err.message ===
-                                    "Request failed with status code 403"
-                                )
-                                    setError("Unknown error");
-                                else setError(err.message);
-                            });
+                            )
+                                .then(() => {
+                                    navigation.navigate("Login");
+                                })
+                                .catch((err: any) => {
+                                    setShowError(true);
+                                    if (
+                                        err.message ===
+                                        "Request failed with status code 403"
+                                    )
+                                        setError("Server error");
+                                    else if (err.response.data.message)
+                                        setError(err.response.data.message);
+                                    else setError(err.message);
+                                });
                         else setShowError(true);
                     }}
                 />

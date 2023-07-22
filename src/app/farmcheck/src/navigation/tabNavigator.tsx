@@ -2,12 +2,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import FAIcon from "react-native-vector-icons/FontAwesome5";
 import MCIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import Farms from "../screens/farms";
 import Home from "../screens/home";
 import Profile from "../screens/profile";
 import Wiki from "../screens/wiki";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
+import FarmStack from "./farmStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -76,7 +76,7 @@ const TabNavigator = () => {
             />
             <Tab.Screen
                 name="Farms"
-                component={Farms}
+                component={FarmStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View style={styles.icon}>
