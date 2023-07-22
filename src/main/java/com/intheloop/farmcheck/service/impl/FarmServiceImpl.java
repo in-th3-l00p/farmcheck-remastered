@@ -91,12 +91,15 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public Collection<FarmUser> getFarmUsers(Long id, int page) {
-        var farm = this.get(id);
+    public Collection<FarmUser> getFarmUsers(Farm farm, int page) {
         return farmUserRepository.findAllByFarm(
-                farm,
-                PageRequest.of(page, Constants.PAGE_SIZE)
+                farm, PageRequest.of(page, Constants.PAGE_SIZE)
         );
+    }
+
+    @Override
+    public int getFarmUsersCount(Farm farm) {
+        return farmUserRepository.countAllByFarm(farm);
     }
 
     @Override
@@ -105,6 +108,13 @@ public class FarmServiceImpl implements FarmService {
                 authenticationUtils.getAuthentication(),
                 PageRequest.of(page, Constants.PAGE_SIZE)
         ).stream().map(FarmUser::getFarm).toList();
+    }
+
+    @Override
+    public int getCurrentUserFarmsCount() {
+        return farmUserRepository.countAllByUser(
+                authenticationUtils.getAuthentication()
+        );
     }
 
     @Override

@@ -13,4 +13,6 @@ public interface FarmUserRepository extends CrudRepository<FarmUser, Long> {
     Optional<FarmUser> findByFarmAndUser(Farm farm, User user);
     List<FarmUser> findAllByFarm(Farm farm, Pageable pageable);
     List<FarmUser> findAllByUser(User user, Pageable pageable);
+    int countAllByUser(User user);
+    int countAllByFarm(Farm farm);
 }

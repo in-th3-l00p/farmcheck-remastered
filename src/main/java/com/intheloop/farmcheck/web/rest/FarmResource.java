@@ -62,6 +62,19 @@ public class FarmResource {
     }
 
     /**
+     * {@code GET /api/v1/farm/all/count} : Gets the number of farms of the current user
+     * @return the number of farms of the current user with status {@code 200 (OK)}
+     */
+    @GetMapping("/all/count")
+    public ResponseEntity<?> getFarmsCount() {
+        try {
+            return ResponseEntity.ok(farmService.getCurrentUserFarmsCount());
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code GET /api/v1/farm/users} : Gets farm's users
      * @param farmId : the id of the farm
      * @param page : used for pagination
@@ -74,13 +87,27 @@ public class FarmResource {
     public ResponseEntity<?> getFarmUsers(
             @RequestParam("farmId") Long farmId,
             @RequestParam(value = "page", defaultValue = "0") int page
-            ) {
+    ) {
         try {
             return ResponseEntity.ok(farmService
-                    .getFarmUsers(farmId, page)
+                    .getFarmUsers(farmService.get(farmId), page)
                     .stream()
                     .map(farmUser -> new UserRoleDTO(farmUser.getUser(), farmUser.getUserRole()))
                     .toList());
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
+     * {@code GET /api/v1/farm/users/count} : Gets the number of users in a farm
+     * @param farmId : the id of the farm
+     * @return the number of users in the farm with status {@code 200 (OK)}
+     */
+    @GetMapping(path = "/users/count")
+    public ResponseEntity<?> getFarmUsersCount(@RequestParam("farmId") Long farmId) {
+        try {
+            return ResponseEntity.ok(farmService.getFarmUsersCount(farmService.get(farmId)));
         } catch (ResponseException e) {
             return e.toResponseEntity();
         }
