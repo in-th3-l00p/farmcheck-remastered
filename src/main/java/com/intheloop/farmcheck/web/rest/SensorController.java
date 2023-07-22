@@ -27,12 +27,12 @@ public class SensorController {
     }
 
     /**
-     * {@code GET /api/v1/sensor} : Get sensor data
+     * {@code GET /api/v1/sensor} : Get sensor info
      * @param sensorId : sensor id
      * @return status {@code 200 (OK)} and body {@link SensorDTO}
      */
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getSensorData(
+    public ResponseEntity<?> getSensorInfo(
             @RequestParam("sensorId") String sensorId
     ) {
         try {
@@ -60,9 +60,30 @@ public class SensorController {
             @RequestParam(value = "page", defaultValue = "0") int page
     ) {
         try {
-            return ResponseEntity.ok(sensorService.getFarmSensors(
-                    farmService.get(farmId), page
-            ));
+            return ResponseEntity.ok(sensorService
+                    .getFarmSensors(farmService.get(farmId), page)
+                    .stream()
+                    .map(SensorDTO::new)
+                    .toList()
+            );
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
+     * {@code GET /api/v1/sensor/farm/count} : Get farm sensors count
+     * @param farmId : farm id
+     * @return status {@code 200 (OK)} and body {@link SensorDTO}
+     */
+    @GetMapping("/farm/count")
+    public ResponseEntity<?> countFarmSensors(
+            @RequestParam("farmId") Long farmId
+    ) {
+        try {
+            return ResponseEntity.ok(
+                    sensorService.countFarmSensors(farmService.get(farmId))
+            );
         } catch (ResponseException e) {
             return e.toResponseEntity();
         }
@@ -90,6 +111,22 @@ public class SensorController {
                     .map(SensorDataDTO::new)
                     .toList()
             );
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid sensor id");
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    @GetMapping("/data/count")
+    public ResponseEntity<?> countSensorData(
+            @RequestParam("sensorId") String sensorId
+    ) {
+        try {
+            var uuid = UUID.fromString(sensorId);
+            return ResponseEntity.ok(sensorService.countSensorData(
+                    sensorService.get(uuid)
+            ));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Invalid sensor id");
         } catch (ResponseException e) {
