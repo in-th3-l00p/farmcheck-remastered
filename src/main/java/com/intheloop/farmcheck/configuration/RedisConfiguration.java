@@ -11,12 +11,14 @@ public class RedisConfiguration {
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisConfiguration = new RedisStandaloneConfiguration();
+        redisConfiguration.setHostName("localhost");
+        redisConfiguration.setPort(6379);
         return new JedisConnectionFactory(redisConfiguration);
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
+    public RedisTemplate<?, ?> redisTemplate() {
+        RedisTemplate<Long, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
         return template;
     }

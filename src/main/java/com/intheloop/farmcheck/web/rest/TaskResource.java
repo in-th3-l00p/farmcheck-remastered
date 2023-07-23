@@ -90,11 +90,32 @@ public class TaskResource { // todo: unit test it
     }
 
     /**
+     * {@code GET /api/v1/task/count} : Gets the current user's tasks count
+     * @param farmId : the farm id, if -1, then all tasks are returned
+     * @return status {@code 200 (OK)} and a list of tasks if the request was successful
+     */
+    @GetMapping("/count")
+    public ResponseEntity<?> countCurrentUserTasks(
+            @RequestParam(value = "farmId", defaultValue = "-1") Long farmId) {
+        if (farmId >= 0L) {
+            try {
+                return ResponseEntity.ok(taskService.countCurrentUserTasks(farmService.get(farmId)));
+            } catch (ResponseException e) {
+                return e.toResponseEntity();
+            }
+        }
+        try {
+            return ResponseEntity.ok(taskService.countCurrentUserTasks());
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code GET /api/v1/task/farm} : Gets the tasks for a farm
      * @param farmId : the farm id
      * @param page : the page number
      * @return status {@code 200 (OK)} and a list of tasks if the request was successful
-     * todo: fix paging bug
      */
     @GetMapping(
             value = "/farm",
@@ -106,7 +127,7 @@ public class TaskResource { // todo: unit test it
     ) {
         try {
             return ResponseEntity.ok(taskService
-                    .getFarmTasks(farmService.get(farmId))
+                    .getFarmTasks(farmService.get(farmId), page)
                     .stream()
                     .map(TaskDTO::new)
                     .toList());
@@ -115,14 +136,23 @@ public class TaskResource { // todo: unit test it
         }
     }
 
+    /**
+     * {@code GET /api/v1/task/users} : Gets the users for a task
+     * @param taskId : the task id
+     * @param page : the page number
+     * @return status {@code 200 (OK)} and a list of users if the request was successful
+     */
     @GetMapping(
             value = "/users",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> getTaskUsers(@RequestParam("taskId") Long taskId) {
+    public ResponseEntity<?> getTaskUsers(
+            @RequestParam("taskId") Long taskId,
+            @RequestParam(value = "page", defaultValue = "0") int page
+    ) {
         try {
             return ResponseEntity.ok(taskService
-                    .getTaskUsers(taskService.get(taskId))
+                    .getTaskUsers(taskService.get(taskId), page)
                     .stream()
                     .map(TaskUserDTO::new)
                     .toList());

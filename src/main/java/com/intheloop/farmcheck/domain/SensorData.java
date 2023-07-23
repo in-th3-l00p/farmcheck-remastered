@@ -1,14 +1,13 @@
 package com.intheloop.farmcheck.domain;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @RedisHash("SensorData")
-public class SensorData implements Serializable {
+public class SensorData {
     @Id private Long id;
     private Double soilMoisture;
     private Double soilTemperature;
@@ -17,7 +16,9 @@ public class SensorData implements Serializable {
     private Double longitude;
     private Double latitude;
     private LocalDateTime createdAt = LocalDateTime.now();
-    @ManyToOne private Sensor sensor;
+
+    @Indexed
+    private String sensorId;
 
     public SensorData() {
     }
@@ -29,7 +30,7 @@ public class SensorData implements Serializable {
             Double airTemperature,
             Double longitude,
             Double latitude,
-            Sensor sensor
+            String sensorId
     ) {
         this.soilMoisture = soilMoisture;
         this.soilTemperature = soilTemperature;
@@ -37,7 +38,15 @@ public class SensorData implements Serializable {
         this.airTemperature = airTemperature;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.sensor = sensor;
+        this.sensorId = sensorId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getSoilMoisture() {
@@ -96,11 +105,11 @@ public class SensorData implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Sensor getSensor() {
-        return sensor;
+    public String getSensorId() {
+        return sensorId;
     }
 
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
     }
 }

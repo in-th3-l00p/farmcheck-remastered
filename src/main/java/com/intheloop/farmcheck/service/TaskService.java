@@ -21,9 +21,11 @@ public interface TaskService {
     );
     Task get(Long id);
     Collection<Pair<Task, Boolean>> getCurrentUserTasks(int page);
+    int countCurrentUserTasks();
     Collection<Pair<Task, Boolean>> getCurrentUserTasks(Farm farm, int page);
-    Collection<Task> getFarmTasks(Farm farm);
-    Collection<TaskUser> getTaskUsers(Task task);
+    int countCurrentUserTasks(Farm farm);
+    Collection<Task> getFarmTasks(Farm farm, int page);
+    Collection<TaskUser> getTaskUsers(Task task, int page);
     void finish(Task task);
     void update(
             Task task,

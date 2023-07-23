@@ -11,8 +11,10 @@ public interface SensorService {
     void create(String name, String description, Farm farm);
     Sensor get(UUID id);
     Collection<Sensor> getFarmSensors(Farm farm, int page);
+    int countFarmSensors(Farm farm);
     Collection<SensorData> getSensorData(Sensor sensor, int page);
-    void addSensorData(
+    int countSensorData(Sensor sensor);
+    SensorData addSensorData(
             Sensor sensor,
             Double soilMoisture,
             Double soilTemperature,

@@ -9,7 +9,9 @@ import com.intheloop.farmcheck.repository.SensorDataRepository;
 import com.intheloop.farmcheck.repository.SensorRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.SensorService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -66,16 +68,44 @@ public class SensorServiceImpl implements SensorService {
         );
         if (currentFarmUser.isEmpty())
             throw FarmServiceImpl.UNAUTHORIZED;
-        return sensorRepository.findAllByFarm(farm);
+        return sensorRepository.findAllByFarm(farm, PageRequest.of(page, Constants.PAGE_SIZE));
+    }
+
+    @Override
+    public int countFarmSensors(Farm farm) {
+        var currentFarmUser = farmUserRepository.findByFarmAndUser(
+                farm, authenticationUtils.getAuthentication()
+        );
+        if (currentFarmUser.isEmpty())
+            throw FarmServiceImpl.UNAUTHORIZED;
+        return sensorRepository.countAllByFarm(farm);
     }
 
     @Override
     public Collection<SensorData> getSensorData(Sensor sensor, int page) {
-        return sensorDataRepository.findAllBySensorId(sensor.getId());
+        var currentFarmUser = farmUserRepository.findByFarmAndUser(
+                sensor.getFarm(), authenticationUtils.getAuthentication()
+        );
+        if (currentFarmUser.isEmpty())
+            throw FarmServiceImpl.UNAUTHORIZED;
+        return sensorDataRepository.findAllBySensorId(
+                sensor.getId().toString(),
+                PageRequest.of(page, Constants.PAGE_SIZE)
+        );
     }
 
     @Override
-    public void addSensorData(
+    public int countSensorData(Sensor sensor) {
+        var currentFarmUser = farmUserRepository.findByFarmAndUser(
+                sensor.getFarm(), authenticationUtils.getAuthentication()
+        );
+        if (currentFarmUser.isEmpty())
+            throw FarmServiceImpl.UNAUTHORIZED;
+        return sensorDataRepository.countAllBySensorId(sensor.getId().toString());
+    }
+
+    @Override
+    public SensorData addSensorData(
             Sensor sensor,
             Double soilMoisture,
             Double soilTemperature,
@@ -91,9 +121,9 @@ public class SensorServiceImpl implements SensorService {
                 airHumidity,
                 longitude,
                 latitude,
-                sensor
+                sensor.getId().toString()
         );
-        sensorDataRepository.save(sensorData);
+        return sensorDataRepository.save(sensorData);
     }
 
     @Override
@@ -110,6 +140,7 @@ public class SensorServiceImpl implements SensorService {
             throw FarmServiceImpl.UNAUTHORIZED;
         sensor.setName(name);
         sensor.setDescription(description);
+        sensorRepository.save(sensor);
     }
 
     @Override
@@ -123,7 +154,7 @@ public class SensorServiceImpl implements SensorService {
         )
             throw FarmServiceImpl.UNAUTHORIZED;
         sensorDataRepository.deleteAll(sensorDataRepository
-                .findAllBySensorId(sensor.getId())
+                .findAllBySensorId(sensor.getId().toString())
         );
         sensorRepository.delete(sensor);
     }
