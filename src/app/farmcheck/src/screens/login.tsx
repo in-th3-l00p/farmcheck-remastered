@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import {
+    Image,
     KeyboardAvoidingView,
     StyleSheet,
     TouchableOpacity,
@@ -29,6 +30,13 @@ const Login = ({ navigation }: { navigation: any }) => {
                 { backgroundColor: theme().colors.background },
             ]}>
             <KeyboardAvoidingView behavior="height">
+                <View style={{ alignItems: "center" }}>
+                    <Image
+                        style={{ ...styles.logo }}
+                        source={require("../../assets/farmcheckText.png")}
+                    />
+                </View>
+
                 <View
                     style={{
                         width: 240,
@@ -132,6 +140,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
+    },
+    logo: {
+        objectFit: "contain",
+        width: 200,
+        height: 50,
+        marginBottom: 10,
     },
 });
 

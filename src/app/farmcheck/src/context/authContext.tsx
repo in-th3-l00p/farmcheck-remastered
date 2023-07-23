@@ -94,6 +94,41 @@ export const AuthProvider = ({ children }: { children: any }) => {
         });
     };
 
+    const update = (
+        token: string,
+        username: string,
+        firstName: string,
+        lastName: string,
+        email: string
+    ) => {
+        return new Promise((resolve, reject) => {
+            axios
+                .put(
+                    GetUserURL,
+                    {
+                        username: username,
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                .then((response) => {
+                    setUserInfo(response.data);
+                    resolve(response.data);
+                    // setIsLoading(false);
+                })
+                .catch((error) => {
+                    reject(error);
+                    // setIsLoading(false);
+                });
+        });
+    };
+
     const logout = () => {
         setIsLoading(true);
         setUserToken(null);
@@ -128,6 +163,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
                 login,
                 logout,
                 register,
+                update,
                 isLoading,
                 userToken,
                 userInfo,

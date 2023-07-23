@@ -15,6 +15,7 @@ interface IconInputProps {
     validate?: (value: string) => boolean;
     onValidateChange?: (value: boolean) => void;
     errorEmpty?: boolean;
+    maxLength?: number;
 }
 
 const IconInput = ({
@@ -28,6 +29,7 @@ const IconInput = ({
     validate,
     onValidateChange,
     errorEmpty = false,
+    maxLength = 100,
 }: IconInputProps) => {
     const [isFocused, setIsFocused] = useState(false);
     const [isHidden, setIsHidden] = useState(hidden);
@@ -78,6 +80,7 @@ const IconInput = ({
                     setIsFocused(false);
                 }}
                 selectionColor={theme().colors.grey}
+                maxLength={maxLength}
             />
             {hidden && (
                 <View style={styles.iconContainer}>

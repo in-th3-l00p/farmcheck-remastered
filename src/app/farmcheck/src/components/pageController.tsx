@@ -10,12 +10,16 @@ const PageController = ({
     setPage,
     click,
     width = 80,
+    style,
+    position = "relative",
 }: {
     max: number;
     page: number;
     setPage: any;
     click?: any;
     width?: number;
+    style?: any;
+    position?: "absolute" | "relative";
 }) => {
     let size = max + 2;
     let minSize = 2;
@@ -30,13 +34,15 @@ const PageController = ({
                 alignItems: "center",
                 flexDirection: "row",
                 marginTop: -10,
+                ...style,
+                position: position,
             }}>
             <Grid
                 container
                 style={{
                     width: width + "%",
                 }}>
-                <Grid size={minSize}>
+                <Grid size={minSize + (position === "absolute" ? 0.4 : 0)}>
                     <IconButton
                         icon="chevron-left"
                         iconColor={theme().colors.grey}

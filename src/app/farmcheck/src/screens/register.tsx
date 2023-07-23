@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import {
+    Image,
     KeyboardAvoidingView,
     StyleSheet,
     TouchableOpacity,
@@ -41,6 +42,13 @@ const Register = ({ navigation }: { navigation: any }) => {
                 { backgroundColor: theme().colors.background },
             ]}>
             <KeyboardAvoidingView behavior="height">
+                <View style={{ alignItems: "center" }}>
+                    <Image
+                        style={{ ...styles.logo }}
+                        source={require("../../assets/farmcheckText.png")}
+                    />
+                </View>
+
                 <View
                     style={{
                         width: 240,
@@ -73,6 +81,7 @@ const Register = ({ navigation }: { navigation: any }) => {
                         onChange={setFirstName}
                         style={{ width: 120 }}
                         errorEmpty={showError && !firstName}
+                        maxLength={20}
                     />
                     <Input
                         placeholder="Last name"
@@ -80,6 +89,7 @@ const Register = ({ navigation }: { navigation: any }) => {
                         onChange={setLastName}
                         style={{ width: 120, marginLeft: 10 }}
                         errorEmpty={showError && !lastName}
+                        maxLength={20}
                     />
                 </View>
 
@@ -90,6 +100,7 @@ const Register = ({ navigation }: { navigation: any }) => {
                     onChange={setUsername}
                     style={{ marginTop: 10 }}
                     errorEmpty={showError && !username}
+                    maxLength={20}
                 />
 
                 <IconInput
@@ -224,6 +235,12 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
+    },
+    logo: {
+        objectFit: "contain",
+        width: 200,
+        height: 50,
+        marginBottom: 10,
     },
 });
 

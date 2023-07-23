@@ -1,117 +1,130 @@
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { IconButton } from "react-native-paper";
+import { IconButton, Searchbar } from "react-native-paper";
+import IIcon from "react-native-vector-icons/Ionicons";
 import Button from "../components/button";
 import ErrorText from "../components/errorText";
-import FarmElement from "../components/farmElement";
 import Grid from "../components/grid";
 import Input from "../components/input";
 import Modal from "../components/modal";
 import PageController from "../components/pageController";
+import SensorElement from "../components/sensorElement";
 import Text from "../components/text";
 import { AuthContext } from "../context/authContext";
-import { FarmContext } from "../context/farmContext";
+import { SensorContext } from "../context/sensorContext";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
-import Loading from "./loading";
 
-const Farms = ({ navigation }: { navigation: any }) => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const [farmName, setFarmName] = useState("");
-    const [farmDescription, setFarmDescription] = useState("");
-    const [error, setError] = useState<string>("");
-    const [farms, setFarms] = useState<any>([]);
-    const [farmCreated, setFarmCreated] = useState(false);
-    const [users, setUsers] = useState<any>([]);
+const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
+    const [searchQuery, setSearchQuery] = useState("");
     const [page, setPage] = useState(0);
-    const [farmCount, setFarmCount] = useState(-1);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [sensorName, setSensorName] = useState("");
+    const [sensorDescription, setSensorDescription] = useState("");
+    const [error, setError] = useState<string>("");
+    const [sensorCreated, setSensorCreated] = useState(false);
+    const [sensorCount, setSensorCount] = useState(-1);
+    const [sensors, setSensors] = useState<any>([]);
 
-    const { create, getAll, getUsers, getCount } = useContext(FarmContext);
-    const { userToken }: any = useContext(AuthContext);
+    const { farm } = route.params;
+    const { create, getCount, getAll } = useContext(SensorContext);
+    const { userToken } = useContext(AuthContext);
+
+    const sensor = {};
+    const data: any = [];
 
     useEffect(() => {
-        const getFarmUsers = async (res: any) => {
-            const allUsers: any = [];
-
-            for (const farm of res) {
-                const farmUsers = await getUsers(userToken, farm.id);
-                allUsers.push(farmUsers);
-            }
-
-            return allUsers;
-        };
-
-        getAll(userToken, page).then((res: any) => {
-            setFarmCreated(false);
-            setFarms(res);
-
-            getFarmUsers(res).then((res: any) => {
-                setUsers(res);
-            });
+        getAll(userToken, farm.id, page).then((res: any) => {
+            setSensorCreated(false);
+            setSensors(res);
         });
 
-        getCount(userToken).then((res: any) => {
-            setFarmCount(res);
+        getCount(userToken, farm.id).then((res: any) => {
+            setSensorCount(res);
         });
-    }, [farmCreated, page]);
+    }, [sensorCreated, page]);
 
-    if (
-        (farms.length === 0 && farmCount !== 0) ||
-        farmCount === -1 ||
-        users.length !== farms.length
-    )
-        return <Loading />;
+    // if (
+    //     (sensors.length === 0 && sensorCount !== 0) ||
+    //     sensorCount === -1
+    // )
+    //     return <Loading />;
 
     return (
         <View
             style={{
                 flex: 1,
+                display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: theme().colors.background,
             }}>
             <View style={styles.container}>
-                <View style={{ marginTop: 50, marginBottom: 20 }}>
-                    <Grid container>
-                        <Grid size={8}>
-                            <Text bold fontSize={25}>
-                                Your Farms
-                            </Text>
-                        </Grid>
-                        <Grid size={2}>
-                            <IconButton
-                                icon="plus"
-                                iconColor={theme().colors.light}
-                                size={30}
-                                style={styles.icon}
-                                animated
-                                containerColor={theme().colors.primary}
-                                onPress={() => setModalVisible(true)}
-                            />
-                        </Grid>
-                    </Grid>
+                <View style={styles.titleContainer}>
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        activeOpacity={ActiveOpacity}
+                        style={{
+                            ...styles.back,
+                            backgroundColor: theme().colors.primary,
+                        }}>
+                        <IIcon
+                            name="chevron-back-outline"
+                            size={28}
+                            color={theme().colors.light}
+                            style={{ marginLeft: -3 }}
+                        />
+                    </TouchableOpacity>
+
+                    <View style={{ width: "100%" }}>
+                        <Text fontSize={25} bold center>
+                            Sensors
+                        </Text>
+                    </View>
+
+                    <IconButton
+                        icon="plus"
+                        iconColor={theme().colors.light}
+                        size={30}
+                        style={styles.add}
+                        animated
+                        containerColor={theme().colors.primary}
+                        onPress={() => setModalVisible(true)}
+                    />
                 </View>
 
-                <View
-                    style={{
-                        width: "100%",
-                    }}>
+                <View>
+                    <Searchbar
+                        placeholder="Search"
+                        value={searchQuery}
+                        onChangeText={(query) => setSearchQuery(query)}
+                        style={{
+                            ...styles.search,
+                            backgroundColor: theme().colors.lightGrey,
+                        }}
+                        inputStyle={{
+                            ...styles.input,
+                            color: theme().colors.dark,
+                        }}
+                    />
+                </View>
+                <View style={{ width: "100%" }}>
                     <View style={{ alignItems: "center" }}>
-                        {farms.length === 0 ? (
+                        {sensors.length === 0 ? (
                             <View
                                 style={{
-                                    height: "90%",
                                     justifyContent: "center",
+                                    height: "90%",
                                     width: 250,
                                 }}>
                                 <Text center>
-                                    You have no farms yet. Click the plus icon
-                                    to create a new farm.
+                                    You have no sensors yet. Click the plus icon
+                                    to create a new sensor.
                                 </Text>
                             </View>
                         ) : (
                             <View>
-                                {farms.map(
+                                {sensors.map(
                                     (farm: any, index: any) =>
                                         index < 5 && (
                                             <TouchableOpacity
@@ -121,14 +134,14 @@ const Farms = ({ navigation }: { navigation: any }) => {
                                                     navigation.navigate(
                                                         "Window",
                                                         {
-                                                            farm: farm,
-                                                            users: users[index],
+                                                            sensor: sensor,
+                                                            data: data,
                                                         }
                                                     );
                                                 }}>
-                                                <FarmElement
-                                                    farm={farm}
-                                                    users={users[index]}
+                                                <SensorElement
+                                                    sensor={sensor}
+                                                    data={data[index]}
                                                     key={index}
                                                 />
                                             </TouchableOpacity>
@@ -138,13 +151,13 @@ const Farms = ({ navigation }: { navigation: any }) => {
                         )}
                     </View>
                 </View>
-                {farmCount > 5 && (
+                {sensorCount > 5 && (
                     <PageController
-                        max={Math.ceil(farmCount / 5) - 1}
+                        max={0}
                         page={page}
                         setPage={setPage}
                         position="absolute"
-                        style={{ bottom: 12 }}
+                        style={{ bottom: 0 }}
                     />
                 )}
             </View>
@@ -154,7 +167,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                     <Grid container style={{ width: "80%" }}>
                         <Grid size={10.5}>
                             <Text fontSize={18} bold>
-                                Create new Farm
+                                Create new Sensor
                             </Text>
                         </Grid>
                         <Grid size={1.5}>
@@ -165,10 +178,10 @@ const Farms = ({ navigation }: { navigation: any }) => {
                                 style={styles.icon}
                                 animated
                                 onPress={() => {
-                                    setError("");
-                                    setFarmName("");
-                                    setFarmDescription("");
                                     setModalVisible(false);
+                                    setSensorName("");
+                                    setSensorDescription("");
+                                    setError("");
                                 }}
                             />
                         </Grid>
@@ -180,16 +193,16 @@ const Farms = ({ navigation }: { navigation: any }) => {
                     )}
                     <View style={{ width: "80%" }}>
                         <Input
-                            placeholder="Farm Name"
-                            value={farmName}
-                            onChange={setFarmName}
+                            placeholder="Sensor Name"
+                            value={sensorName}
+                            onChange={setSensorName}
                             style={{ width: "100%", marginTop: error ? 0 : 20 }}
                             maxLength={25}
                         />
                         <Input
                             placeholder="Description"
-                            value={farmDescription}
-                            onChange={setFarmDescription}
+                            value={sensorDescription}
+                            onChange={setSensorDescription}
                             style={{ marginTop: 20, height: "auto" }}
                             multiline
                             maxLength={110}
@@ -200,13 +213,13 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             text="Create"
                             style={{ marginTop: 20 }}
                             onPress={() => {
-                                create(farmName, farmDescription, userToken)
+                                create(sensorName, sensorDescription, userToken)
                                     .then(() => {
-                                        setFarmName("");
-                                        setFarmDescription("");
                                         setError("");
+                                        setSensorName("");
+                                        setSensorDescription("");
                                         setModalVisible(false);
-                                        setFarmCreated(true);
+                                        setSensorCreated(true);
                                     })
                                     .catch((err: any) => {
                                         if (
@@ -230,20 +243,49 @@ const Farms = ({ navigation }: { navigation: any }) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: "92%",
+        height: "90%",
         position: "absolute",
-        top: -5,
+        top: 0,
         width: "100%",
         alignItems: "center",
+    },
+    titleContainer: {
+        marginTop: 55,
+        display: "flex",
+        flexDirection: "row",
+        position: "relative",
+        marginHorizontal: 50,
+    },
+    back: {
+        borderRadius: 50,
+        width: 35,
+        height: 35,
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        zIndex: 1,
+    },
+    search: {
+        marginTop: 35,
+        width: 310,
+        alignSelf: "center",
+        height: 40,
+    },
+    input: {
+        top: -8,
+    },
+    add: {
+        width: 35,
+        height: 35,
+        borderRadius: 50,
+        marginLeft: -40,
+        marginTop: 0,
     },
     icon: {
         width: 35,
         height: 35,
         borderRadius: 50,
     },
-    scroll: {
-        width: "100%",
-    },
 });
 
-export default Farms;
+export default Sensors;
