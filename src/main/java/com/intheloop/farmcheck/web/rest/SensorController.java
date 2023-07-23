@@ -7,6 +7,8 @@ import com.intheloop.farmcheck.web.rest.dto.SensorDTO;
 import com.intheloop.farmcheck.web.rest.dto.SensorDataDTO;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -172,22 +174,24 @@ public class SensorController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @SendTo("/topic/sensorData/{sensorId}")
     public ResponseEntity<?> submitPostData(
-            @RequestParam("sensorId") String sensorId,
+            @RequestParam("sensorId") @DestinationVariable String sensorId,
             @RequestBody SensorDataDTO sensorDataDTO
     ) {
         try {
             var uuid = UUID.fromString(sensorId);
-            sensorService.addSensorData(
-                    sensorService.get(uuid),
-                    sensorDataDTO.getSoilMoisture(),
-                    sensorDataDTO.getSoilTemperature(),
-                    sensorDataDTO.getAirTemperature(),
-                    sensorDataDTO.getAirHumidity(),
-                    sensorDataDTO.getLongitude(),
-                    sensorDataDTO.getLatitude()
-            );
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(new SensorDataDTO(
+                    sensorService.addSensorData(
+                            sensorService.get(uuid),
+                            sensorDataDTO.getSoilMoisture(),
+                            sensorDataDTO.getSoilTemperature(),
+                            sensorDataDTO.getAirTemperature(),
+                            sensorDataDTO.getAirHumidity(),
+                            sensorDataDTO.getLongitude(),
+                            sensorDataDTO.getLatitude()
+                    )
+            ));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Invalid sensor id");
         } catch (ResponseException e) {

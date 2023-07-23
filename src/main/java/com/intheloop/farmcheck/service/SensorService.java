@@ -14,7 +14,7 @@ public interface SensorService {
     int countFarmSensors(Farm farm);
     Collection<SensorData> getSensorData(Sensor sensor, int page);
     int countSensorData(Sensor sensor);
-    void addSensorData(
+    SensorData addSensorData(
             Sensor sensor,
             Double soilMoisture,
             Double soilTemperature,

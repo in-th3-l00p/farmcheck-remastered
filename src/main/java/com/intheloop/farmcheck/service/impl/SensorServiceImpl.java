@@ -105,7 +105,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public void addSensorData(
+    public SensorData addSensorData(
             Sensor sensor,
             Double soilMoisture,
             Double soilTemperature,
@@ -123,7 +123,7 @@ public class SensorServiceImpl implements SensorService {
                 latitude,
                 sensor.getId().toString()
         );
-        sensorDataRepository.save(sensorData);
+        return sensorDataRepository.save(sensorData);
     }
 
     @Override
