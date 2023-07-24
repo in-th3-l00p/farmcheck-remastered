@@ -1,6 +1,7 @@
 import { PaperProvider } from "react-native-paper";
 import { AuthProvider } from "./src/context/authContext";
 import { FarmProvider } from "./src/context/farmContext";
+import { SensorProvider } from "./src/context/sensorContext";
 import AppNavigation from "./src/navigation/appNavigation";
 import { theme } from "./src/util/theme";
 
@@ -22,7 +23,9 @@ const App = () => {
         <PaperProvider theme={theme()}>
             <AuthProvider>
                 <FarmProvider>
-                    <AppNavigation />
+                    <SensorProvider>
+                        <AppNavigation />
+                    </SensorProvider>
                 </FarmProvider>
             </AuthProvider>
         </PaperProvider>

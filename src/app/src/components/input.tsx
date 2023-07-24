@@ -11,6 +11,7 @@ interface InputProps {
     hidden?: boolean;
     errorEmpty?: boolean;
     multiline?: boolean;
+    maxLength?: number;
 }
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
     hidden,
     errorEmpty = false,
     multiline = false,
+    maxLength = 25,
 }: InputProps) => {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -49,6 +51,7 @@ const Input = ({
                 placeholderTextColor={theme().colors.grey}
                 multiline={multiline}
                 numberOfLines={5}
+                maxLength={maxLength}
                 onFocus={() => {
                     setIsFocused(true);
                 }}

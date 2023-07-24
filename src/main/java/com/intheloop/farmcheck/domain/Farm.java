@@ -29,6 +29,9 @@ public class Farm {
     @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
     private Set<Task> tasks = new HashSet<>();
 
+    @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
+    private Set<Chat> chats = new HashSet<>();
+
     public Farm() {
     }
 

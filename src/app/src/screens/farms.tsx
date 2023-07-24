@@ -22,19 +22,45 @@ const Farms = ({ navigation }: { navigation: any }) => {
     const [error, setError] = useState<string>("");
     const [farms, setFarms] = useState<any>([]);
     const [farmCreated, setFarmCreated] = useState(false);
+    const [users, setUsers] = useState<any>([]);
     const [page, setPage] = useState(0);
+    const [farmCount, setFarmCount] = useState(-1);
 
-    const { create, getAll } = useContext(FarmContext);
+    const { create, getAll, getUsers, getCount } = useContext(FarmContext);
     const { userToken }: any = useContext(AuthContext);
 
     useEffect(() => {
+        const getFarmUsers = async (res: any) => {
+            const allUsers: any = [];
+
+            for (const farm of res) {
+                const farmUsers = await getUsers(userToken, farm.id);
+                allUsers.push(farmUsers);
+            }
+
+            return allUsers;
+        };
+
         getAll(userToken, page).then((res: any) => {
             setFarmCreated(false);
             setFarms(res);
+
+            getFarmUsers(res).then((res: any) => {
+                setUsers(res);
+            });
+        });
+
+        getCount(userToken).then((res: any) => {
+            setFarmCount(res);
         });
     }, [farmCreated, page]);
 
-    if (farms.length === 0) return <Loading />;
+    if (
+        (farms.length === 0 && farmCount !== 0) ||
+        farmCount === -1 ||
+        users.length !== farms.length
+    )
+        return <Loading />;
 
     return (
         <View
@@ -56,7 +82,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             <IconButton
                                 icon="plus"
                                 iconColor={theme().colors.light}
-                                size={24}
+                                size={30}
                                 style={styles.icon}
                                 animated
                                 containerColor={theme().colors.primary}
@@ -66,13 +92,21 @@ const Farms = ({ navigation }: { navigation: any }) => {
                     </Grid>
                 </View>
 
-                <View style={{ width: "100%" }}>
+                <View
+                    style={{
+                        width: "100%",
+                    }}>
                     <View style={{ alignItems: "center" }}>
                         {farms.length === 0 ? (
-                            <View>
-                                <Text>
+                            <View
+                                style={{
+                                    height: "90%",
+                                    justifyContent: "center",
+                                    width: 250,
+                                }}>
+                                <Text center>
                                     You have no farms yet. Click the plus icon
-                                    to create a
+                                    to create a new farm.
                                 </Text>
                             </View>
                         ) : (
@@ -83,16 +117,18 @@ const Farms = ({ navigation }: { navigation: any }) => {
                                             <TouchableOpacity
                                                 key={index}
                                                 activeOpacity={ActiveOpacity}
-                                                onPress={() =>
+                                                onPress={() => {
                                                     navigation.navigate(
-                                                        "FarmWindow",
+                                                        "Window",
                                                         {
                                                             farm: farm,
+                                                            users: users[index],
                                                         }
-                                                    )
-                                                }>
+                                                    );
+                                                }}>
                                                 <FarmElement
                                                     farm={farm}
+                                                    users={users[index]}
                                                     key={index}
                                                 />
                                             </TouchableOpacity>
@@ -102,7 +138,15 @@ const Farms = ({ navigation }: { navigation: any }) => {
                         )}
                     </View>
                 </View>
-                <PageController max={0} page={page} setPage={setPage} />
+                {farmCount > 5 && (
+                    <PageController
+                        max={Math.ceil(farmCount / 5) - 1}
+                        page={page}
+                        setPage={setPage}
+                        position="absolute"
+                        style={{ bottom: 12 }}
+                    />
+                )}
             </View>
 
             <Modal visible={modalVisible} setVisible={setModalVisible}>
@@ -140,6 +184,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             value={farmName}
                             onChange={setFarmName}
                             style={{ width: "100%", marginTop: error ? 0 : 20 }}
+                            maxLength={25}
                         />
                         <Input
                             placeholder="Description"
@@ -147,6 +192,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             onChange={setFarmDescription}
                             style={{ marginTop: 20, height: "auto" }}
                             multiline
+                            maxLength={110}
                         />
                     </View>
                     <View>
