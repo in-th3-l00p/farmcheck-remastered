@@ -1,28 +1,17 @@
 package com.intheloop.farmcheck.domain;
 
 import jakarta.persistence.*;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "messages")
+@RedisHash("Message")
 public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column(name = "content", length = 2000, nullable = false)
+    @Id private Long id;
     private String content;
-
-    @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    @ManyToOne
-    private Chat chat;
-
-    @ManyToOne
-    private FarmUser sender;
+    private Long chatId;
+    private String senderUsername;
 
     public Message() {
     }
@@ -51,19 +40,19 @@ public class Message {
         this.createdAt = createdAt;
     }
 
-    public Chat getChat() {
-        return chat;
+    public Long getChatId() {
+        return chatId;
     }
 
-    public void setChat(Chat chat) {
-        this.chat = chat;
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
     }
 
-    public FarmUser getSender() {
-        return sender;
+    public String getSenderUsername() {
+        return senderUsername;
     }
 
-    public void setSender(FarmUser sender) {
-        this.sender = sender;
+    public void setSenderUsername(String senderUsername) {
+        this.senderUsername = senderUsername;
     }
 }

@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
         email: string
     ) => {
         return new Promise((resolve, reject) => {
-            axios
+            api
                 .put(
                     GetUserURL,
                     {

@@ -35,9 +35,6 @@ public class FarmUser {
     @Column(nullable = false)
     private LocalDate createdAt = LocalDate.now();
 
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.DETACH)
-    private Set<Message> messages = new HashSet<>();
-
     public FarmUser() {
     }
 
@@ -87,13 +84,5 @@ public class FarmUser {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
     }
 }

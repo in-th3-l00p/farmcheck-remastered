@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-// todo: receiving updates using websockets
 @RestController
 @RequestMapping("/api/v1/sensor")
-public class SensorController {
+public class SensorResource {
     private final SensorService sensorService;
     private final FarmService farmService;
 
-    public SensorController(
+    public SensorResource(
             SensorService sensorService,
             FarmService farmService
     ) {

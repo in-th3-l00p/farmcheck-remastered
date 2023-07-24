@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../util/api";
 import { createContext, useState } from "react";
 import {
     GetFarmUsersURL,
@@ -17,7 +17,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .post(
                     PostFarmURL,
                     {
@@ -45,7 +45,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .get(GetFarmsURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .get(GetFarmUsersURL, {
                     params: {
                         farmId: farmId,
@@ -93,7 +93,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .get(GetFarmsCountURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .put(PutUserRoleURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,

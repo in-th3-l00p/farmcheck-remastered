@@ -23,9 +23,6 @@ public class Chat {
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Message> messages = new HashSet<>();
-
     @ManyToOne(optional = false)
     private Farm farm;
 
@@ -62,14 +59,6 @@ public class Chat {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
     }
 
     public Farm getFarm() {
