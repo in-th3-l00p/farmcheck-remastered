@@ -2,6 +2,7 @@ package com.intheloop.farmcheck.web.rest;
 
 import com.intheloop.farmcheck.service.FarmService;
 import com.intheloop.farmcheck.service.SensorService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.SensorDTO;
 import com.intheloop.farmcheck.web.rest.dto.SensorDataDTO;
@@ -58,11 +59,12 @@ public class SensorResource {
     )
     public ResponseEntity<?> getFarmSensors(
             @RequestParam("farmId") Long farmId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(sensorService
-                    .getFarmSensors(farmService.get(farmId), page)
+                    .getFarmSensors(farmService.get(farmId), page, pageSize)
                     .stream()
                     .map(SensorDTO::new)
                     .toList()
@@ -102,12 +104,13 @@ public class SensorResource {
     )
     public ResponseEntity<?> getSensorData(
             @RequestParam("sensorId") String sensorId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             var uuid = UUID.fromString(sensorId);
             return ResponseEntity.ok(sensorService
-                    .getSensorData(sensorService.get(uuid), page)
+                    .getSensorData(sensorService.get(uuid), page, pageSize)
                     .stream()
                     .map(SensorDataDTO::new)
                     .toList()

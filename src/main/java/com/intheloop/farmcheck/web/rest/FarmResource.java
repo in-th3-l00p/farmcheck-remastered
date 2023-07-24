@@ -3,6 +3,7 @@ package com.intheloop.farmcheck.web.rest;
 import com.intheloop.farmcheck.domain.FarmUser;
 import com.intheloop.farmcheck.service.FarmService;
 import com.intheloop.farmcheck.service.UserService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.FarmDTO;
 import com.intheloop.farmcheck.web.rest.dto.UserRoleDTO;
@@ -43,16 +44,20 @@ public class FarmResource {
     /**
      * {@code GET /api/v1/farm/all} : Gets the current user's farms
      * @param page : used for pagination
+     * @param pageSize : used for pagination
      * @return a {@link java.util.List<FarmDTO>} with status {@code 200 (OK)}
      */
     @GetMapping(
             path = "/all",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> getFarms(@RequestParam(value = "page", defaultValue = "0") int page) {
+    public ResponseEntity<?> getFarms(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
+    ) {
         try {
             return ResponseEntity.ok(farmService
-                    .getCurrentUserFarms(page)
+                    .getCurrentUserFarms(page, pageSize)
                     .stream()
                     .map(FarmDTO::new)
                     .toList());
@@ -78,6 +83,7 @@ public class FarmResource {
      * {@code GET /api/v1/farm/users} : Gets farm's users
      * @param farmId : the id of the farm
      * @param page : used for pagination
+     * @param pageSize : used for pagination
      * @return a {@link java.util.List<UserRoleDTO>} with status {@code 200 (OK)}
      */
     @GetMapping(
@@ -86,11 +92,12 @@ public class FarmResource {
     )
     public ResponseEntity<?> getFarmUsers(
             @RequestParam("farmId") Long farmId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(farmService
-                    .getFarmUsers(farmService.get(farmId), page)
+                    .getFarmUsers(farmService.get(farmId), page, pageSize)
                     .stream()
                     .map(farmUser -> new UserRoleDTO(farmUser.getUser(), farmUser.getUserRole()))
                     .toList());

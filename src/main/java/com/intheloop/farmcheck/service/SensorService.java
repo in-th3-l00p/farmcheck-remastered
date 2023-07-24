@@ -10,9 +10,9 @@ import java.util.UUID;
 public interface SensorService {
     void create(String name, String description, Farm farm);
     Sensor get(UUID id);
-    Collection<Sensor> getFarmSensors(Farm farm, int page);
+    Collection<Sensor> getFarmSensors(Farm farm, int page, int pageSize);
     int countFarmSensors(Farm farm);
-    Collection<SensorData> getSensorData(Sensor sensor, int page);
+    Collection<SensorData> getSensorData(Sensor sensor, int page, int pageSize);
     int countSensorData(Sensor sensor);
     SensorData addSensorData(
             Sensor sensor,

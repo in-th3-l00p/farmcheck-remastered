@@ -9,7 +9,6 @@ import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.repository.MessageRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.ChatService;
-import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -56,13 +55,13 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public List<Chat> getByFarm(Farm farm, int page) {
+    public List<Chat> getByFarm(Farm farm, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
         if (currentFarmUser.isEmpty())
             throw FarmServiceImpl.NOT_IN_FARM;
-        return chatRepository.findAllByFarm(farm, PageRequest.of(page, Constants.PAGE_SIZE));
+        return chatRepository.findAllByFarm(farm, PageRequest.of(page, pageSize));
     }
 
     @Override
@@ -115,7 +114,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public List<Message> getChatMessages(Chat chat, int page) {
+    public List<Message> getChatMessages(Chat chat, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 chat.getFarm(), authenticationUtils.getAuthentication()
         );
@@ -124,8 +123,7 @@ public class ChatServiceImpl implements ChatService {
         return messageRepository.findAllByChatId(
                 chat.getId(),
                 PageRequest.of(
-                        page,
-                        Constants.PAGE_SIZE,
+                        page, pageSize,
                         Sort.by("createdAt").descending()
                 )
         );

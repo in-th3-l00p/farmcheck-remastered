@@ -9,7 +9,6 @@ import com.intheloop.farmcheck.repository.SensorDataRepository;
 import com.intheloop.farmcheck.repository.SensorRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.SensorService;
-import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -62,13 +61,13 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public Collection<Sensor> getFarmSensors(Farm farm, int page) {
+    public Collection<Sensor> getFarmSensors(Farm farm, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
         if (currentFarmUser.isEmpty())
             throw FarmServiceImpl.UNAUTHORIZED;
-        return sensorRepository.findAllByFarm(farm, PageRequest.of(page, Constants.PAGE_SIZE));
+        return sensorRepository.findAllByFarm(farm, PageRequest.of(page, pageSize));
     }
 
     @Override
@@ -82,7 +81,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public Collection<SensorData> getSensorData(Sensor sensor, int page) {
+    public Collection<SensorData> getSensorData(Sensor sensor, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 sensor.getFarm(), authenticationUtils.getAuthentication()
         );
@@ -90,7 +89,7 @@ public class SensorServiceImpl implements SensorService {
             throw FarmServiceImpl.UNAUTHORIZED;
         return sensorDataRepository.findAllBySensorId(
                 sensor.getId().toString(),
-                PageRequest.of(page, Constants.PAGE_SIZE)
+                PageRequest.of(page, pageSize)
         );
     }
 

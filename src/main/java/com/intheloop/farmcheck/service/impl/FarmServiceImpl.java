@@ -7,7 +7,6 @@ import com.intheloop.farmcheck.repository.FarmRepository;
 import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.FarmService;
-import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -91,9 +90,9 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public Collection<FarmUser> getFarmUsers(Farm farm, int page) {
+    public Collection<FarmUser> getFarmUsers(Farm farm, int page, int pageSize) {
         return farmUserRepository.findAllByFarm(
-                farm, PageRequest.of(page, Constants.PAGE_SIZE)
+                farm, PageRequest.of(page, pageSize)
         );
     }
 
@@ -103,10 +102,10 @@ public class FarmServiceImpl implements FarmService {
     }
 
     @Override
-    public Collection<Farm> getCurrentUserFarms(int page) {
+    public Collection<Farm> getCurrentUserFarms(int page, int pageSize) {
         return farmUserRepository.findAllByUser(
                 authenticationUtils.getAuthentication(),
-                PageRequest.of(page, Constants.PAGE_SIZE)
+                PageRequest.of(page, pageSize)
         ).stream().map(FarmUser::getFarm).toList();
     }
 

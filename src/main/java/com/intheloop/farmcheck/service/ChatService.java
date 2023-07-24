@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface ChatService {
     Chat create(String name, String description, Farm farm);
-    List<Chat> getByFarm(Farm farm, int page);
+    List<Chat> getByFarm(Farm farm, int page, int pageSize);
     Chat get(Long id);
     Chat update(Long id, String name, String description);
     void delete(Long id);
-    List<Message> getChatMessages(Chat chat, int page);
+    List<Message> getChatMessages(Chat chat, int page, int pageSize);
     Message createMessage(Chat chat, String text);
 }

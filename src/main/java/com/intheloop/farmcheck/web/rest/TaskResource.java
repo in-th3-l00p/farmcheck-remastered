@@ -3,6 +3,7 @@ package com.intheloop.farmcheck.web.rest;
 import com.intheloop.farmcheck.service.FarmService;
 import com.intheloop.farmcheck.service.TaskService;
 import com.intheloop.farmcheck.service.UserService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.*;
 import org.springframework.http.MediaType;
@@ -66,11 +67,13 @@ public class TaskResource { // todo: unit test it
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCurrentUserTasks(
             @RequestParam(value = "farmId", defaultValue = "-1") Long farmId,
-            @RequestParam(name = "page", defaultValue = "0") int page) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
+    ) {
         if (farmId >= 0L) {
             try {
                 return ResponseEntity.ok(taskService
-                        .getCurrentUserTasks(farmService.get(farmId), page)
+                        .getCurrentUserTasks(farmService.get(farmId), page, pageSize)
                         .stream()
                         .map(CurrentUserTaskDTO::new)
                         .toList());
@@ -80,7 +83,7 @@ public class TaskResource { // todo: unit test it
         }
         try {
             return ResponseEntity.ok(taskService
-                    .getCurrentUserTasks(page)
+                    .getCurrentUserTasks(page, pageSize)
                     .stream()
                     .map(CurrentUserTaskDTO::new)
                     .toList());
@@ -123,11 +126,12 @@ public class TaskResource { // todo: unit test it
     )
     public ResponseEntity<?> getTasksByFarm(
             @RequestParam("farmId") Long farmId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(taskService
-                    .getFarmTasks(farmService.get(farmId), page)
+                    .getFarmTasks(farmService.get(farmId), page, pageSize)
                     .stream()
                     .map(TaskDTO::new)
                     .toList());
@@ -148,11 +152,12 @@ public class TaskResource { // todo: unit test it
     )
     public ResponseEntity<?> getTaskUsers(
             @RequestParam("taskId") Long taskId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(taskService
-                    .getTaskUsers(taskService.get(taskId), page)
+                    .getTaskUsers(taskService.get(taskId), page, pageSize)
                     .stream()
                     .map(TaskUserDTO::new)
                     .toList());

@@ -2,6 +2,7 @@ package com.intheloop.farmcheck.web.rest;
 
 import com.intheloop.farmcheck.service.ChatService;
 import com.intheloop.farmcheck.service.FarmService;
+import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.ResponseException;
 import com.intheloop.farmcheck.web.rest.dto.ChatDTO;
 import com.intheloop.farmcheck.web.rest.dto.MessageDTO;
@@ -69,6 +70,7 @@ public class ChatResource {
      * {@code GET /api/v1/chat/farm/{farmId}} : Get farm chats
      * @param farmId : farm id
      * @param page : page number
+     * @param pageSize : page size
      * @return status {@code 200 (OK)} and body {@link java.util.List<ChatDTO>}
      */
     @GetMapping(
@@ -77,11 +79,12 @@ public class ChatResource {
     )
     public ResponseEntity<?> getFarmChats(
             @PathVariable Long farmId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(chatService
-                    .getByFarm(farmService.get(farmId), page)
+                    .getByFarm(farmService.get(farmId), page, pageSize)
                     .stream().map(ChatDTO::new).toList()
             );
         } catch (ResponseException e) {
@@ -93,6 +96,7 @@ public class ChatResource {
      * {@code GET /api/v1/chat/messages/{chatId}} : Get chat messages
      * @param chatId : chat id
      * @param page : page number
+     * @param pageSize: page size
      * @return status {@code 200 (OK)} and body {@link java.util.List<MessageDTO>}
      */
     @GetMapping(
@@ -101,11 +105,12 @@ public class ChatResource {
     )
     public ResponseEntity<?> getChatMessages(
             @PathVariable Long chatId,
-            @RequestParam(value = "page", defaultValue = "0") int page
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = Constants.PAGE_SIZE) int pageSize
     ) {
         try {
             return ResponseEntity.ok(chatService
-                    .getChatMessages(chatService.get(chatId), page)
+                    .getChatMessages(chatService.get(chatId), page, pageSize)
                     .stream()
                     .map(MessageDTO::new)
                     .toList());

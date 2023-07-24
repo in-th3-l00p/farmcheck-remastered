@@ -6,7 +6,6 @@ import com.intheloop.farmcheck.repository.TaskRepository;
 import com.intheloop.farmcheck.repository.TaskUserRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.TaskService;
-import com.intheloop.farmcheck.utils.Constants;
 import com.intheloop.farmcheck.utils.Pair;
 import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.data.domain.PageRequest;
@@ -80,11 +79,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Collection<Pair<Task, Boolean>> getCurrentUserTasks(int page) {
+    public Collection<Pair<Task, Boolean>> getCurrentUserTasks(int page, int pageSize) {
         return taskUserRepository
                 .findAllByUser(
                         authenticationUtils.getAuthentication(),
-                        PageRequest.of(page, Constants.PAGE_SIZE)
+                        PageRequest.of(page, pageSize)
                 )
                 .stream()
                 .map(taskUser -> new Pair<>(taskUser.getTask(), taskUser.isCompleted()))
@@ -98,7 +97,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Collection<Pair<Task, Boolean>> getCurrentUserTasks(Farm farm, int page) {
+    public Collection<Pair<Task, Boolean>> getCurrentUserTasks(Farm farm, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -127,7 +126,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Collection<Task> getFarmTasks(Farm farm, int page) {
+    public Collection<Task> getFarmTasks(Farm farm, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 farm, authenticationUtils.getAuthentication()
         );
@@ -136,11 +135,11 @@ public class TaskServiceImpl implements TaskService {
                 currentFarmUser.get().getUserRole() == FarmUser.UserRole.WORKER
         )
             throw FarmServiceImpl.UNAUTHORIZED;
-        return taskRepository.findAllByFarm(farm, PageRequest.of(page, Constants.PAGE_SIZE));
+        return taskRepository.findAllByFarm(farm, PageRequest.of(page, pageSize));
     }
 
     @Override
-    public Collection<TaskUser> getTaskUsers(Task task, int page) {
+    public Collection<TaskUser> getTaskUsers(Task task, int page, int pageSize) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
                 task.getFarm(), authenticationUtils.getAuthentication()
         );
@@ -158,7 +157,7 @@ public class TaskServiceImpl implements TaskService {
             );
         }
         return taskUserRepository.findAllByTask(
-                task, PageRequest.of(page, Constants.PAGE_SIZE)
+                task, PageRequest.of(page, pageSize)
         );
     }
 

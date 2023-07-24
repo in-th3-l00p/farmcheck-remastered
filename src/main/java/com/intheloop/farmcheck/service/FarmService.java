@@ -10,9 +10,9 @@ public interface FarmService {
     void create(String name, String description);
     void addUser(Farm farm, User worker);
     Farm get(Long id);
-    Collection<FarmUser> getFarmUsers(Farm farm, int page);
+    Collection<FarmUser> getFarmUsers(Farm farm, int page, int pageSize);
     int getFarmUsersCount(Farm farm);
-    Collection<Farm> getCurrentUserFarms(int page);
+    Collection<Farm> getCurrentUserFarms(int page, int pageSize);
     int getCurrentUserFarmsCount();
     void update(Farm farm, String name, String description);
     void updateUserRole(Farm farm, User user, FarmUser.UserRole role);
