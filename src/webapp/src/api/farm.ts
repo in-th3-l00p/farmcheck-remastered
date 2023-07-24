@@ -1,10 +1,10 @@
-import api from "./api";
-import {Farm} from "../utils/types";
+import api, {throwIfUnauthorized} from "./api";
+import {Farm, FarmRole, FarmUser} from "../utils/types";
 import {AxiosError} from "axios";
+import {PAGE_SIZE} from "../utils/contants";
 
 export async function getFarms(page: number = 0) {
-    if (!localStorage.getItem("token"))
-        throw new Error("UNAUTHORIZED");
+    throwIfUnauthorized();
     const resp = await api.get("/farm/all", { params: { page } });
     const farms = resp.data as Farm[];
     farms.forEach(farm => farm.createdAt = new Date(farm.createdAt));
@@ -12,8 +12,7 @@ export async function getFarms(page: number = 0) {
 }
 
 export async function createFarm(name: string, description: string) {
-    if (!localStorage.getItem("token"))
-        throw new Error("UNAUTHORIZED");
+    throwIfUnauthorized();
     if (!name)
         throw new Error("All fields should be completed.");
     try {
@@ -23,4 +22,23 @@ export async function createFarm(name: string, description: string) {
         if (err instanceof AxiosError)
             throw new Error(err.response?.data["message"]);
     }
+}
+
+export async function getFarm(id: number) {
+    throwIfUnauthorized();
+    const resp = await api.get("/farm", {params: {farmId: id}});
+    const farm = resp.data as Farm;
+    farm.createdAt = new Date(farm.createdAt);
+    return farm;
+}
+
+export async function getFarmUsers(farmId: number, page: number): Promise<FarmUser[]> {
+    throwIfUnauthorized();
+    const resp = await api.get("/farm/users", {params: {farmId, page, pageSize: PAGE_SIZE}});
+    return resp.data;
+}
+
+export async function updateUserRole(farmId: number, userId: number, role: FarmRole) {
+    throwIfUnauthorized();
+    await api.put("/farm/user", {}, {params: {farmId, userId, role}});
 }

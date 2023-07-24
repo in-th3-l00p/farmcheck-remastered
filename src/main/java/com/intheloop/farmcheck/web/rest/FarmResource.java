@@ -190,7 +190,7 @@ public class FarmResource {
      * {@code PUT /api/v1/farm/user} : Updates a farm user role
      * @param farmId : the farm's id
      * @param userId : the user's id
-     * @param userRole : user's new role
+     * @param role : user's new role
      * @return status {@code 200 (OK)} if the user's role was updated
      */
     @PutMapping(
@@ -200,13 +200,13 @@ public class FarmResource {
     public ResponseEntity<?> updateUserRole(
             @RequestParam("farmId") Long farmId,
             @RequestParam("userId") Long userId,
-            @RequestParam("userRole") FarmUser.UserRole userRole
+            @RequestParam("role") FarmUser.UserRole role
     ) {
         try {
             farmService.updateUserRole(
                     farmService.get(farmId),
                     userService.get(userId),
-                    userRole
+                    role
             );
             return ResponseEntity.ok().build();
         } catch (ResponseException e) {

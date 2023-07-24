@@ -13,5 +13,5 @@ export default function useQuery(callback: () => Promise<void>) {
             });
     }, []);
 
-    return [loading, error];
+    return {loading, error};
 }

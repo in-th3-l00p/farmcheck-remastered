@@ -5,8 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthContext, {useAuthContext} from './context/AuthContext';
 import Login from './route/Login';
 import Register from './route/Register';
-import Farms from './route/farms/Farms';
-import CreateFarm from './route/farms/CreateFarm';
+import Farms from './route/farms/All';
+import CreateFarm from './route/farms/Create';
+import Farm from './route/farms/Display';
+import Users from './route/farms/Users';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   {
     path: "/farms/create",
     element: <CreateFarm />
+  },
+  {
+    path: "/farms/:id",
+    element: <Farm />
+  },
+  {
+    path: "/farms/:id/users",
+    element: <Users />
   }
 ]);
 

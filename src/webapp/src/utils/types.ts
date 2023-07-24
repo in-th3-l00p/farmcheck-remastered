@@ -6,6 +6,12 @@ export interface User {
     email: string;
 }
 
+export type FarmRole = "WORKER" | "ADMIN" | "OWNER";
+
+export interface FarmUser extends User {
+    role: FarmRole;
+}
+
 export interface Farm {
     id: number;
     name: string;

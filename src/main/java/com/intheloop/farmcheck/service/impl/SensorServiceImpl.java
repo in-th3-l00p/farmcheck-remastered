@@ -11,6 +11,7 @@ import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.SensorService;
 import com.intheloop.farmcheck.utils.ResponseException;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -89,7 +90,7 @@ public class SensorServiceImpl implements SensorService {
             throw FarmServiceImpl.UNAUTHORIZED;
         return sensorDataRepository.findAllBySensorId(
                 sensor.getId().toString(),
-                PageRequest.of(page, pageSize)
+                PageRequest.of(page, pageSize, Sort.by("createdAt").descending())
         );
     }
 
