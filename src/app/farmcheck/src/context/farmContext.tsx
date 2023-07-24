@@ -1,6 +1,6 @@
-import axios from "axios";
 import { createContext, useState } from "react";
 import { GetFarmsURL, PostFarmURL } from "../util/links";
+import api from "../util/api";
 
 export const FarmContext = createContext<any>(null);
 
@@ -11,7 +11,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .post(
                     PostFarmURL,
                     {
@@ -39,7 +39,7 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            axios
+            api
                 .get(GetFarmsURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,

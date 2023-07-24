@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
+import api from "../util/api";
 import { createContext, useEffect, useState } from "react";
 import { GetUserURL, PostLoginURL, PostRegisterURL } from "../util/links";
 
@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             // setIsLoading(true);
 
-            axios
+            api
                 .post(PostLoginURL, {
                     username: username,
                     password: password,
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             // setIsLoading(true);
 
-            axios
+            api
                 .post(PostRegisterURL, {
                     username: username,
                     firstName: firstName,
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             // setIsLoading(true);
 
-            axios
+            api
                 .get(GetUserURL, {
                     headers: {
                         Authorization: `Bearer ${token}`,
