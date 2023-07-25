@@ -42,6 +42,25 @@ public class FarmResource {
     }
 
     /**
+     * {@code GET /api/v1/farm/role} : Gets the current user's role in a farm
+     * @param farmId : the farm's id
+     * @return a {@link UserRoleDTO} with status {@code 200 (OK)}
+     */
+    @GetMapping(
+            path = "/role",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getFarmRole(@RequestParam("farmId") Long farmId) {
+        try {
+            return ResponseEntity.ok(farmService.getCurrentUserFarmRole(
+                    farmService.get(farmId)
+            ));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code GET /api/v1/farm/all} : Gets the current user's farms
      * @param page : used for pagination
      * @param pageSize : used for pagination

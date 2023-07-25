@@ -29,7 +29,7 @@ const Farm = () => {
                 </Row>
                 <Row>
                     <Col><Link to=""><Button>Chat</Button></Link></Col>
-                    <Col><Link to=""><Button>Tasks</Button></Link></Col>
+                    <Col><Link to={`/farms/${params.id}/tasks`}><Button>Tasks</Button></Link></Col>
                 </Row>
             </Container>
         </QueryHandler>

@@ -9,6 +9,7 @@ import Farms from './route/farms/All';
 import CreateFarm from './route/farms/Create';
 import Farm from './route/farms/Display';
 import Users from './route/farms/Users';
+import Tasks from './route/tasks/Tasks';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/farms/:id/users",
     element: <Users />
+  },
+  {
+    path: "/farms/:id/tasks",
+    element: <Tasks />
   }
 ]);
 

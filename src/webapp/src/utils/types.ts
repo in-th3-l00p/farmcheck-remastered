@@ -18,3 +18,20 @@ export interface Farm {
     description: string;
     createdAt: Date;
 }
+
+interface BaseTask {
+    name: string;
+    description: string;
+    important: boolean;
+}
+
+export interface CreateTask extends BaseTask {
+    userIds: number[];
+    deadline: string;
+}
+
+export interface Task extends BaseTask {
+    id: number;
+    createdAt: Date;
+    deadline: Date;
+}

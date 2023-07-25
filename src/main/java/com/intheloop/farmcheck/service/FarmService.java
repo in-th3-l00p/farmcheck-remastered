@@ -3,6 +3,7 @@ package com.intheloop.farmcheck.service;
 import com.intheloop.farmcheck.domain.Farm;
 import com.intheloop.farmcheck.domain.FarmUser;
 import com.intheloop.farmcheck.domain.User;
+import com.intheloop.farmcheck.web.rest.dto.UserRoleDTO;
 
 import java.util.Collection;
 
@@ -14,6 +15,7 @@ public interface FarmService {
     int getFarmUsersCount(Farm farm);
     Collection<Farm> getCurrentUserFarms(int page, int pageSize);
     int getCurrentUserFarmsCount();
+    UserRoleDTO getCurrentUserFarmRole(Farm farm);
     void update(Farm farm, String name, String description);
     void updateUserRole(Farm farm, User user, FarmUser.UserRole role);
     void removeUser(Farm farm, User user);

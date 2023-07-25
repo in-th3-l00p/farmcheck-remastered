@@ -5,9 +5,10 @@ import QueryHandler from "../../components/QueryHandler";
 import useQuery from "../../hooks/useQuery";
 import {FarmRole, FarmUser} from "../../utils/types";
 import api from "../../api/api";
-import {getFarmUsers, updateUserRole} from "../../api/farm";
+import {addFarmUser, deleteFarmUser, getFarmUsers, updateUserRole} from "../../api/farm";
 import {PAGE_SIZE} from "../../utils/contants";
 import AuthContext from "../../context/AuthContext";
+import {getUser} from "../../api/user";
 
 const Users = () => {
     const auth = useContext(AuthContext);
@@ -28,9 +29,52 @@ const Users = () => {
     const [selectedUserIndex, setSelectedUserIndex] = useState<number>(-1);
     const [showRoleModal, setShowRoleModal] = useState<boolean>(false);
     const [role, setRole] = useState<FarmRole>("WORKER");
+    const [showRemoveModal, setShowRemoveModal] = useState<boolean>(false);
+    const [showAddModal, setShowAddModal] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>("");
 
     return (
         <>
+            <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
+                <Modal.Header>Add user</Modal.Header>
+                <Modal.Body>
+                    <Form.Group>
+                        <Form.Label>Username</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            value={username} 
+                        />
+                    </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => {
+                        getUser(username)
+                            .then(user => {
+                                // @ts-ignore
+                                addFarmUser(params.id, user.id);
+                            })
+                            .then(() => window.location.reload());
+                    }}>Add</Button>
+                    <Button variant="danger" onClick={() => {
+                        setUsername("");
+                        setShowAddModal(false);
+                    }}>Cancel</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={showRemoveModal} onHide={() => setShowRemoveModal(false)}>
+                <Modal.Header>Are you sure you want to delete this user?</Modal.Header>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={() => { 
+                        // @ts-ignore
+                        deleteFarmUser(params.id, users[selectedUserIndex].id) 
+                            .then(() => window.location.reload())
+                    }}>
+                        Delete
+                    </Button>
+                    <Button onClick={() => setShowRemoveModal(false)}>Close</Button>
+                </Modal.Footer>
+            </Modal>
             <Modal show={showRoleModal} onHide={() => setShowRoleModal(false)}>
                 <Modal.Header>Change user role</Modal.Header>
                 <Modal.Body>
@@ -56,6 +100,7 @@ const Users = () => {
             <QueryHandler query={query}>
                 <h1>Users</h1>
                 <Button onClick={() => navigate(-1)}>Back</Button>
+                <Button onClick={() => setShowAddModal(true)}>+</Button>
 
                 <ul>
                     {users.map((user, index) => (
@@ -73,7 +118,15 @@ const Users = () => {
                                         setSelectedUserIndex(index);
                                         setShowRoleModal(true);
                                     }}>Change role</Button>
-                                    <Button variant="danger">Remove</Button>
+                                    <Button 
+                                        variant="danger"
+                                        onClick={() => {
+                                            setSelectedUserIndex(index);
+                                            setShowRemoveModal(true);
+                                        }}
+                                    >
+                                        Remove
+                                    </Button>
                                 </>
                             )}
                         </li>

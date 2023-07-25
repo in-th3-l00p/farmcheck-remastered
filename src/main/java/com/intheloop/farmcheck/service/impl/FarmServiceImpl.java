@@ -8,6 +8,7 @@ import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.security.AuthenticationUtils;
 import com.intheloop.farmcheck.service.FarmService;
 import com.intheloop.farmcheck.utils.ResponseException;
+import com.intheloop.farmcheck.web.rest.dto.UserRoleDTO;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -114,6 +115,15 @@ public class FarmServiceImpl implements FarmService {
         return farmUserRepository.countAllByUser(
                 authenticationUtils.getAuthentication()
         );
+    }
+
+    @Override
+    public UserRoleDTO getCurrentUserFarmRole(Farm farm) {
+        var current = authenticationUtils.getAuthentication();
+        var currentFarmUser = farmUserRepository.findByFarmAndUser(farm, current);
+        if (currentFarmUser.isEmpty())
+            throw UNAUTHORIZED;
+        return new UserRoleDTO(current, currentFarmUser.get().getUserRole());
     }
 
     @Override

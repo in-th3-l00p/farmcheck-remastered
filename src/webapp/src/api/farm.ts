@@ -42,3 +42,18 @@ export async function updateUserRole(farmId: number, userId: number, role: FarmR
     throwIfUnauthorized();
     await api.put("/farm/user", {}, {params: {farmId, userId, role}});
 }
+
+export async function deleteFarmUser(farmId: number, userId: number) {
+    throwIfUnauthorized();
+    await api.delete("/farm/user", {params: {farmId, userId}});
+}
+
+export async function addFarmUser(farmId: number, userId: number) {
+    throwIfUnauthorized();
+    await api.post("/farm/user", {}, {params: {farmId, userId}});
+}
+
+export async function getFarmRole(farmId: number): Promise<FarmUser> {
+    throwIfUnauthorized();
+    return (await api.get("/farm/role", {params: {farmId}})).data;
+}

@@ -51,6 +51,23 @@ public class UserResource {
     }
 
     /**
+     * {@code GET /api/v1/user/{id}} : Gets the user details of the user with the given username
+     * @param username : user's username
+     * @return user's details with status {@code 200 (OK)}
+     */
+    @GetMapping(
+            path = "/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<?> getUserDetails(@PathVariable String username) {
+        try {
+            return ResponseEntity.ok(new UserDTO(userService.get(username)));
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code PUT /api/v1/user} : Updates the user details of the current user
      * @param userDTO : the user's new details
      * @return status {@code 200 (OK)} if the details are updated, status {@code 400 (BAD REQUEST)} if the given data is bad
