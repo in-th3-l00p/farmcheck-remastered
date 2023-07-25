@@ -93,6 +93,22 @@ public class ChatResource {
     }
 
     /**
+     * {@code GET /api/v1/chat/farm/{farmId}} : Count farm chats
+     * @param farmId : farm id
+     * @return status {@code 200 (OK)} and body {@link Integer}
+     */
+    @GetMapping("/farm/{farmId}/count")
+    public ResponseEntity<?> countFarmChats(@PathVariable Long farmId) {
+        try {
+            return ResponseEntity.ok(
+                    chatService.countByFarm(farmService.get(farmId))
+            );
+        } catch (ResponseException e) {
+            return e.toResponseEntity();
+        }
+    }
+
+    /**
      * {@code GET /api/v1/chat/messages/{chatId}} : Get chat messages
      * @param chatId : chat id
      * @param page : page number

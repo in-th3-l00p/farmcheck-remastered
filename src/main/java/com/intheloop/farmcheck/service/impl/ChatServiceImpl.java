@@ -65,6 +65,16 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
+    public int countByFarm(Farm farm) {
+        var currentFarmUser = farmUserRepository.findByFarmAndUser(
+                farm, authenticationUtils.getAuthentication()
+        );
+        if (currentFarmUser.isEmpty())
+            throw FarmServiceImpl.NOT_IN_FARM;
+        return chatRepository.countAllByFarm(farm);
+    }
+
+    @Override
     public Chat get(Long id) {
         var chat = chatRepository.findById(id);
         if (chat.isEmpty())

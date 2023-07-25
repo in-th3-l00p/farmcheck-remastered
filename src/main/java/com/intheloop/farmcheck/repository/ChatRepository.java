@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface ChatRepository extends CrudRepository<Chat, Long> {
     List<Chat> findAllByFarm(Farm farm, Pageable pageable);
+    int countAllByFarm(Farm farm);
 }
