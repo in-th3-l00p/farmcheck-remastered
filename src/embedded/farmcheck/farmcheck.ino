@@ -12,7 +12,7 @@ std::unique_ptr<Memory::Storage> storage;
 
 char jsonOutput[256];
 bool sendData = false;
-String url = "http://192.168.125.9:8080";
+String url = "http://1e6c-37-251-220-191.ngrok-free.app";
 WiFiManager wifiManager;
 
 void setup() {

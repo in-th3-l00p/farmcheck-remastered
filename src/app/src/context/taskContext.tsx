@@ -86,9 +86,34 @@ export const TaskProvider = ({ children }: { children: any }) => {
         });
     };
 
+    const deleteTask = (token: string, taskId: number) => {
+        return new Promise((resolve, reject) => {
+            api.delete(PostTaskURL, {
+                params: {
+                    taskId: taskId,
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    };
+
     return (
         <TaskContext.Provider
-            value={{ create, getAllFromFarm, getCountFromFarm, isLoading }}>
+            value={{
+                create,
+                getAllFromFarm,
+                getCountFromFarm,
+                deleteTask,
+                isLoading,
+            }}>
             {children}
         </TaskContext.Provider>
     );

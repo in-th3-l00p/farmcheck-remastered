@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { IconButton } from "react-native-paper";
+import { AuthContext } from "../context/authContext";
+import { TaskContext } from "../context/taskContext";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
 import Grid from "./grid";
@@ -10,6 +12,8 @@ import Text from "./text";
 interface TaskElementProps {
     task: any;
     farm: any;
+    user: any;
+    deleted: any;
 }
 
 const calculateTime = (left: number) => {
@@ -22,11 +26,13 @@ const calculateTime = (left: number) => {
     return `${days}d, ${hours}h, ${minutes}m`;
 };
 
-const TaskElement = ({ task, farm }: TaskElementProps) => {
+const TaskElement = ({ task, farm, user, deleted }: TaskElementProps) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const date = new Date(task.deadline);
     const time = calculateTime(date.getTime() - Date.now());
+    const { userToken } = useContext(AuthContext);
+    const { deleteTask } = useContext(TaskContext);
 
     return (
         <View
@@ -39,27 +45,50 @@ const TaskElement = ({ task, farm }: TaskElementProps) => {
                 onPress={() => {
                     setModalVisible(true);
                 }}>
-                <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Text bold fontSize={18}>
-                        {task.name} {task.important ? " - " : ""}
-                    </Text>
-                    <Text bold fontSize={18} color={theme().colors.danger}>
-                        {task.important ? " IMPORTANT" : ""}
-                    </Text>
-                </View>
-                <Text numberOfLines={1}>{task.description}</Text>
-                <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Text>Time left: </Text>
-                    <Text
-                        bold
-                        color={
-                            time === "Expired"
-                                ? theme().colors.danger
-                                : theme().colors.dark
-                        }>
-                        {time}
-                    </Text>
-                </View>
+                <Grid container>
+                    <Grid size={10}>
+                        <View style={{ display: "flex", flexDirection: "row" }}>
+                            <Text bold fontSize={18}>
+                                {task.name} {task.important ? " - " : ""}
+                            </Text>
+                            <Text
+                                bold
+                                fontSize={18}
+                                color={theme().colors.danger}>
+                                {task.important ? " IMPORTANT" : ""}
+                            </Text>
+                        </View>
+                        <Text numberOfLines={1}>{task.description}</Text>
+                        <View style={{ display: "flex", flexDirection: "row" }}>
+                            <Text>Time left: </Text>
+                            <Text
+                                bold
+                                color={
+                                    time === "Expired"
+                                        ? theme().colors.danger
+                                        : theme().colors.dark
+                                }>
+                                {time}
+                            </Text>
+                        </View>
+                    </Grid>
+
+                    {user.role !== "WORKER" && (
+                        <Grid size={2}>
+                            <IconButton
+                                icon="trash-can-outline"
+                                iconColor={theme().colors.light}
+                                containerColor={theme().colors.danger}
+                                size={22}
+                                onPress={() => {
+                                    deleteTask(userToken, task.id).then(() => {
+                                        deleted(true);
+                                    });
+                                }}
+                            />
+                        </Grid>
+                    )}
+                </Grid>
             </TouchableOpacity>
 
             <Modal visible={modalVisible} setVisible={setModalVisible}>

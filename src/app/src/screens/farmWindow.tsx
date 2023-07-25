@@ -191,7 +191,10 @@ const FarmWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                                     borderColor: theme().colors.secondary,
                                 }}
                                 onPress={() =>
-                                    navigation.navigate("Tasks", { farm: farm })
+                                    navigation.navigate("Tasks", {
+                                        farm: farm,
+                                        user: user,
+                                    })
                                 }>
                                 <FIcon
                                     name="tasks"

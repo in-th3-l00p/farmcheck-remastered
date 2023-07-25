@@ -102,9 +102,35 @@ export const SensorProvider = ({ children }: { children: any }) => {
         });
     };
 
+    const deleteSensor = (token: string, sensorId: string) => {
+        return new Promise((resolve, reject) => {
+            api.delete(PostSensorURL, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    sensorId: sensorId,
+                },
+            })
+                .then((response) => {
+                    resolve(response.data);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    };
+
     return (
         <SensorContext.Provider
-            value={{ create, getAll, getCount, getData, isLoading }}>
+            value={{
+                create,
+                getAll,
+                getCount,
+                getData,
+                deleteSensor,
+                isLoading,
+            }}>
             {children}
         </SensorContext.Provider>
     );

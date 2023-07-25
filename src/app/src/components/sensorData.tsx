@@ -18,9 +18,9 @@ const SensorData = (data: any) => {
                     flexDirection: "row",
                 }}>
                 <Text style={{ marginRight: 20 }}>
-                    Air Humidity: {data.airHumidity}%
+                    Air Humidity: {data.airHumidity.toFixed(1)}%
                 </Text>
-                <Text>Air Temperature: {data.airTemperature}°C</Text>
+                <Text>Air Temperature: {data.airTemperature.toFixed(1)}°C</Text>
             </View>
             <View
                 style={{
@@ -28,9 +28,11 @@ const SensorData = (data: any) => {
                     flexDirection: "row",
                 }}>
                 <Text style={{ marginRight: 20 }}>
-                    Soil Moisture: {data.soilMoisture}%
+                    Soil Moisture: {data.soilMoisture.toFixed(1)}%
                 </Text>
-                <Text>Soil Temperature: {data.soilTemperature}°C</Text>
+                <Text>
+                    Soil Temperature: {data.soilTemperature.toFixed(1)}°C
+                </Text>
             </View>
             <Text>
                 Time: {date.getDate()}.{date.getMonth()}.{date.getFullYear()}{" "}
@@ -43,12 +45,13 @@ const SensorData = (data: any) => {
 const styles = StyleSheet.create({
     container: {
         borderRadius: 20,
-        width: "100%",
+        width: "90%",
         borderWidth: 3,
         marginBottom: 10,
         alignItems: "center",
         justifyContent: "center",
-        padding: 10,
+        padding: 5,
+        marginHorizontal: 20,
     },
 });
 

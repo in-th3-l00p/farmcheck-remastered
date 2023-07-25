@@ -8,6 +8,7 @@ import Text from "../components/text";
 import { AuthContext } from "../context/authContext";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
+import Loading from "./loading";
 
 const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
     const [text, setText] = useState("");
@@ -27,6 +28,7 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
             },
             onConnect: () => {
                 setClient(client);
+                console.log(client);
                 client.subscribe("/topic/chat/" + chat.id, (message) => {
                     console.log(JSON.parse(message.body));
                 });
@@ -41,7 +43,8 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
         client.activate();
     }, []);
 
-    if (client === undefined) return <></>;
+    if (client === undefined) return <Loading />;
+
     return (
         <View
             style={{
@@ -90,7 +93,7 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                 />
                 <IconButton
                     icon="send"
-                    size={30}
+                    size={28}
                     iconColor={theme().colors.primary}
                     onPress={() => {
                         client.publish({

@@ -27,13 +27,12 @@ const SensorWindow = ({
     const [data, setData] = useState<any>(null);
     const [count, setCount] = useState(0);
 
-    const { getData } = useContext(SensorContext);
+    const { getData, deleteSensor } = useContext(SensorContext);
     const { userToken } = useContext(AuthContext);
 
     useEffect(() => {
         getData(sensor.id, userToken).then((data: any) => {
             setData(data);
-            console.log(data);
         });
     }, []);
 
@@ -47,7 +46,6 @@ const SensorWindow = ({
             clearTimeout(timer);
             getData(sensor.id, userToken).then((data: any) => {
                 setData(data);
-                console.log(data);
             });
         };
     }, [count]);
@@ -80,6 +78,24 @@ const SensorWindow = ({
                         />
                     </TouchableOpacity>
 
+                    <IconButton
+                        icon="trash-can-outline"
+                        iconColor={theme().colors.light}
+                        containerColor={theme().colors.danger}
+                        size={20}
+                        onPress={() => {
+                            deleteSensor(userToken, sensor.id).then(() => {
+                                navigation.goBack();
+                            });
+                        }}
+                        style={{
+                            position: "absolute",
+                            right: 0,
+                            marginTop: 0,
+                            zIndex: 5,
+                        }}
+                    />
+
                     <View style={{ width: "100%" }}>
                         <Text fontSize={25} bold center>
                             {sensor.name}
@@ -98,7 +114,11 @@ const SensorWindow = ({
                             />
                         </View>
 
-                        <View style={{ alignItems: "center", marginTop: 25 }}>
+                        <View
+                            style={{
+                                alignItems: "center",
+                                marginTop: 25,
+                            }}>
                             {data.length > 0 ? (
                                 <View>
                                     <View
@@ -116,7 +136,10 @@ const SensorWindow = ({
                                                     fontSize={18}
                                                     bold
                                                     style={{ marginLeft: 20 }}>
-                                                    {data[0].airHumidity}%
+                                                    {data[0].airHumidity.toFixed(
+                                                        2
+                                                    )}
+                                                    %
                                                 </Text>
                                             </View>
                                             <View style={styles.icon}>
@@ -128,7 +151,10 @@ const SensorWindow = ({
                                                     fontSize={18}
                                                     bold
                                                     style={{ marginLeft: 20 }}>
-                                                    {data[0].airTemperature}°C
+                                                    {data[0].airTemperature.toFixed(
+                                                        2
+                                                    )}
+                                                    °C
                                                 </Text>
                                             </View>
                                         </View>
@@ -142,7 +168,10 @@ const SensorWindow = ({
                                                     fontSize={18}
                                                     bold
                                                     style={{ marginLeft: 20 }}>
-                                                    {data[0].soilMoisture}%
+                                                    {data[0].soilMoisture.toFixed(
+                                                        2
+                                                    )}
+                                                    %
                                                 </Text>
                                             </View>
                                             <View style={styles.icon}>
@@ -154,12 +183,19 @@ const SensorWindow = ({
                                                     fontSize={18}
                                                     bold
                                                     style={{ marginLeft: 20 }}>
-                                                    {data[0].soilTemperature}°C
+                                                    {data[0].soilTemperature.toFixed(
+                                                        2
+                                                    )}
+                                                    °C
                                                 </Text>
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={{ height: "72%" }}>
+                                    <View
+                                        style={{
+                                            height: "72%",
+                                            alignItems: "center",
+                                        }}>
                                         <ScrollView
                                             style={styles.scroll}
                                             overScrollMode="never">

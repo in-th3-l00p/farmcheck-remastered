@@ -36,7 +36,7 @@ const ChatElement = ({ chat, deleted, user }: ChatElementProps) => {
                             icon="trash-can-outline"
                             iconColor={theme().colors.light}
                             containerColor={theme().colors.danger}
-                            size={24}
+                            size={22}
                             onPress={() => {
                                 deleteChat(userToken, chat.id).then(() => {
                                     deleted(true);
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 3,
         width: "100%",
-        padding: 12,
+        padding: 14,
         marginBottom: 12,
     },
 });

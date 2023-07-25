@@ -43,6 +43,20 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
         });
     }, [sensorCreated, page]);
 
+    useEffect(() => {
+        const focusHandler = navigation.addListener("focus", () => {
+            getAll(userToken, farm.id, page).then((res: any) => {
+                setSensorCreated(false);
+                setSensors(res);
+            });
+
+            getCount(userToken, farm.id).then((res: any) => {
+                setSensorCount(res);
+            });
+        });
+        return focusHandler;
+    }, [navigation]);
+
     if ((sensors.length === 0 && sensorCount !== 0) || sensorCount === -1)
         return <Loading />;
 

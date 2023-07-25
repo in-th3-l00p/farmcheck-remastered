@@ -29,7 +29,7 @@ const Tasks = ({ navigation, route }: { navigation: any; route: any }) => {
     const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
     const [showError, setShowError] = useState(false);
 
-    const { farm } = route.params;
+    const { farm, user } = route.params;
     const { create, getCountFromFarm, getAllFromFarm } =
         useContext(TaskContext);
     const { userToken } = useContext(AuthContext);
@@ -110,6 +110,8 @@ const Tasks = ({ navigation, route }: { navigation: any; route: any }) => {
                                         task={task}
                                         key={index}
                                         farm={farm}
+                                        user={user}
+                                        deleted={setTaskCreated}
                                     />
                                 ))}
                             </View>
