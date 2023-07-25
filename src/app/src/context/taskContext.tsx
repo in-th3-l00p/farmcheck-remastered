@@ -1,29 +1,32 @@
 import { createContext, useState } from "react";
 import api from "../util/api";
 import {
-    GetFarmSensorsCountURL,
-    GetFarmSensorsURL,
-    GetSensorDataURL,
-    PostSensorURL,
+    GetFarmTasksCountURL,
+    GetFarmTasksURL,
+    PostTaskURL,
 } from "../util/links";
 
-export const SensorContext = createContext<any>(null);
+export const TaskContext = createContext<any>(null);
 
-export const SensorProvider = ({ children }: { children: any }) => {
+export const TaskProvider = ({ children }: { children: any }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const create = (
         name: string,
         description: string,
+        deadline: string,
+        important: boolean,
         token: string,
         farmId: string
     ) => {
         return new Promise((resolve, reject) => {
             api.post(
-                PostSensorURL,
+                PostTaskURL,
                 {
                     name: name,
                     description: description,
+                    deadline: deadline,
+                    important: important,
                 },
                 {
                     headers: {
@@ -43,16 +46,16 @@ export const SensorProvider = ({ children }: { children: any }) => {
         });
     };
 
-    const getAll = (token: string, farmId: number, page: number) => {
+    const getAllFromFarm = (token: string, farmId: number, page: number) => {
         return new Promise((resolve, reject) => {
-            api.get(GetFarmSensorsURL, {
+            api.get(GetFarmTasksURL, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
                 params: {
                     farmId: farmId,
                     page: page,
-                    pageSize: 6,
+                    pageSize: 5,
                 },
             })
                 .then((response) => {
@@ -64,33 +67,14 @@ export const SensorProvider = ({ children }: { children: any }) => {
         });
     };
 
-    const getCount = (token: string, farmId: number) => {
+    const getCountFromFarm = (token: string, farmId: number) => {
         return new Promise((resolve, reject) => {
-            api.get(GetFarmSensorsCountURL, {
+            api.get(GetFarmTasksCountURL, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
                 params: {
                     farmId: farmId,
-                },
-            })
-                .then((response) => {
-                    resolve(response.data);
-                })
-                .catch((error) => {
-                    reject(error);
-                });
-        });
-    };
-
-    const getData = (sensorId: string, token: string) => {
-        return new Promise((resolve, reject) => {
-            api.get(GetSensorDataURL, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    sensorId: sensorId,
                 },
             })
                 .then((response) => {
@@ -103,9 +87,9 @@ export const SensorProvider = ({ children }: { children: any }) => {
     };
 
     return (
-        <SensorContext.Provider
-            value={{ create, getAll, getCount, getData, isLoading }}>
+        <TaskContext.Provider
+            value={{ create, getAllFromFarm, getCountFromFarm, isLoading }}>
             {children}
-        </SensorContext.Provider>
+        </TaskContext.Provider>
     );
 };

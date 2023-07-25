@@ -1,5 +1,5 @@
-import api from "../util/api";
 import { createContext, useState } from "react";
+import api from "../util/api";
 import {
     GetFarmUsersURL,
     GetFarmsCountURL,
@@ -17,19 +17,18 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            api
-                .post(
-                    PostFarmURL,
-                    {
-                        name: name,
-                        description: description,
+            api.post(
+                PostFarmURL,
+                {
+                    name: name,
+                    description: description,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
                     },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
+                }
+            )
                 .then((response) => {
                     resolve(response.data);
                     setIsLoading(false);
@@ -45,15 +44,15 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            api
-                .get(GetFarmsURL, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    params: {
-                        page: page,
-                    },
-                })
+            api.get(GetFarmsURL, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    page: page,
+                    pageSize: 5,
+                },
+            })
                 .then((response) => {
                     resolve(response.data);
                     setIsLoading(false);
@@ -69,15 +68,14 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            api
-                .get(GetFarmUsersURL, {
-                    params: {
-                        farmId: farmId,
-                    },
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
+            api.get(GetFarmUsersURL, {
+                params: {
+                    farmId: farmId,
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
                 .then((response) => {
                     resolve(response.data);
                     setIsLoading(false);
@@ -93,12 +91,11 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            api
-                .get(GetFarmsCountURL, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
+            api.get(GetFarmsCountURL, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
                 .then((response) => {
                     resolve(response.data);
                     setIsLoading(false);
@@ -119,17 +116,16 @@ export const FarmProvider = ({ children }: { children: any }) => {
         return new Promise((resolve, reject) => {
             setIsLoading(true);
 
-            api
-                .put(PutUserRoleURL, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    params: {
-                        farmId: farmId,
-                        userId: userId,
-                        userRole: role,
-                    },
-                })
+            api.put(PutUserRoleURL, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                params: {
+                    farmId: farmId,
+                    userId: userId,
+                    userRole: role,
+                },
+            })
                 .then((response) => {
                     resolve(response.data);
                     setIsLoading(false);
@@ -140,6 +136,8 @@ export const FarmProvider = ({ children }: { children: any }) => {
                 });
         });
     };
+
+    const addUser = () => {};
 
     return (
         <FarmContext.Provider

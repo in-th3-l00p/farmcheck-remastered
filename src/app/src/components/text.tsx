@@ -10,6 +10,7 @@ interface TextProps {
     color?: string;
     fontSize?: number;
     center?: boolean;
+    numberOfLines?: number;
 }
 
 const Text = ({
@@ -20,9 +21,11 @@ const Text = ({
     color,
     fontSize = 15,
     center = false,
+    numberOfLines,
 }: TextProps) => {
     return (
         <DefaultText
+            numberOfLines={numberOfLines}
             style={[
                 style,
                 bold ? styles.bold : styles.regular,

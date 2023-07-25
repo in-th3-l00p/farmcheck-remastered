@@ -1,15 +1,10 @@
 import { createContext, useState } from "react";
 import api from "../util/api";
-import {
-    GetFarmSensorsCountURL,
-    GetFarmSensorsURL,
-    GetSensorDataURL,
-    PostSensorURL,
-} from "../util/links";
+import { GetChatCountURL, GetChatURL, PostChatURL } from "../util/links";
 
-export const SensorContext = createContext<any>(null);
+export const ChatContext = createContext<any>(null);
 
-export const SensorProvider = ({ children }: { children: any }) => {
+export const ChatProvider = ({ children }: { children: any }) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const create = (
@@ -20,7 +15,7 @@ export const SensorProvider = ({ children }: { children: any }) => {
     ) => {
         return new Promise((resolve, reject) => {
             api.post(
-                PostSensorURL,
+                PostChatURL,
                 {
                     name: name,
                     description: description,
@@ -45,7 +40,7 @@ export const SensorProvider = ({ children }: { children: any }) => {
 
     const getAll = (token: string, farmId: number, page: number) => {
         return new Promise((resolve, reject) => {
-            api.get(GetFarmSensorsURL, {
+            api.get(GetChatURL + farmId, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -66,7 +61,7 @@ export const SensorProvider = ({ children }: { children: any }) => {
 
     const getCount = (token: string, farmId: number) => {
         return new Promise((resolve, reject) => {
-            api.get(GetFarmSensorsCountURL, {
+            api.get(GetChatCountURL + farmId + "/count", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -83,14 +78,12 @@ export const SensorProvider = ({ children }: { children: any }) => {
         });
     };
 
-    const getData = (sensorId: string, token: string) => {
+    const deleteChat = (token: string, chatId: number) => {
+        console.log(PostChatURL + "/" + chatId);
         return new Promise((resolve, reject) => {
-            api.get(GetSensorDataURL, {
+            api.delete(PostChatURL + "/" + chatId, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                },
-                params: {
-                    sensorId: sensorId,
                 },
             })
                 .then((response) => {
@@ -103,9 +96,9 @@ export const SensorProvider = ({ children }: { children: any }) => {
     };
 
     return (
-        <SensorContext.Provider
-            value={{ create, getAll, getCount, getData, isLoading }}>
+        <ChatContext.Provider
+            value={{ create, getAll, getCount, deleteChat, isLoading }}>
             {children}
-        </SensorContext.Provider>
+        </ChatContext.Provider>
     );
 };

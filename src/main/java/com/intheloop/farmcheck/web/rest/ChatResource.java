@@ -93,7 +93,7 @@ public class ChatResource {
     }
 
     /**
-     * {@code GET /api/v1/chat/farm/{farmId}} : Count farm chats
+     * {@code GET /api/v1/chat/farm/{farmId}/count} : Count farm chats
      * @param farmId : farm id
      * @return status {@code 200 (OK)} and body {@link Integer}
      */

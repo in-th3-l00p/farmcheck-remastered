@@ -11,9 +11,10 @@ namespace Control {
     std::unique_ptr<Hardware::TemperatureSensor> temperatureSensor;
     std::unique_ptr<Hardware::HumiditySensor> humiditySensor;
     std::unique_ptr<Hardware::GPS> gps;
-    std::unique_ptr<Hardware::RGB> rgb;
 
   public:
+    std::unique_ptr<Hardware::RGB> rgb;
+
     Controller(
       int moisturePin,
       int temperaturePin,
@@ -36,15 +37,15 @@ namespace Control {
       humiditySensor->read();
       gps->read();
 
-      if ((moistureSensor->value() < 0 || moistureSensor->value() > 99)
-        || temperatureSensor->value() < 0
-        || (humiditySensor->value().first < 5)
-      )
-        rgb->setColor(255, 0, 0);
-      else if (gps->value().first < 1)
-        rgb->setColor(0, 0, 255);
-      else
-        rgb->setColor(0, 255, 0);
+      // if ((moistureSensor->value() < 0 || moistureSensor->value() > 99)
+      //   || temperatureSensor->value() < 0
+      //   || (humiditySensor->value().first < 5)
+      // )
+      //   rgb->setColor(255, 0, 0);
+      // else if (gps->value().first < 1)
+      //   rgb->setColor(0, 0, 255);
+      // else
+      //   rgb->setColor(0, 255, 0);
     }
 
     com::Data getData() {

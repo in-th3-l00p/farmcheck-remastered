@@ -30,7 +30,6 @@ const Input = ({
         <View
             style={[
                 styles.container,
-                style,
                 {
                     backgroundColor: theme().colors.white,
                     borderWidth: 2,
@@ -41,6 +40,7 @@ const Input = ({
                     borderColor: theme().colors.danger,
                     borderWidth: 2,
                 },
+                style,
             ]}>
             <TextInput
                 style={styles.input}

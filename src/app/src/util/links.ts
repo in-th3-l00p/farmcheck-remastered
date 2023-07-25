@@ -30,3 +30,33 @@ export const GetFarmSensorsURL = "/api/v1/sensor/farm";
 
 //Puts a user's new role
 export const PutUserRoleURL = "/api/v1/farm/user";
+
+//Creates a new sensor
+export const PostSensorURL = "/api/v1/sensor";
+
+//Gets farm's sensors count
+export const GetFarmSensorsCountURL = "/api/v1/sensor/farm/count";
+
+//Gets sensor's data
+export const GetSensorDataURL = "/api/v1/sensor/data";
+
+//Creates a task
+export const PostTaskURL = "/api/v1/task";
+
+//Gets farm's tasks
+export const GetFarmTasksURL = "/api/v1/task/farm";
+
+//Gets farm's tasks count
+export const GetFarmTasksCountURL = "/api/v1/task/count";
+
+//Add new user to farm
+export const PostFarmUser = "/api/v1/farm/user";
+
+//Create chat room
+export const PostChatURL = "/api/v1/chat";
+
+//Get chat rooms
+export const GetChatURL = "/api/v1/chat/farm/";
+
+//Get chat rooms count
+export const GetChatCountURL = "/api/v1/chat/farm/";

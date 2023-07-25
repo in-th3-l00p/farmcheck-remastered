@@ -34,7 +34,9 @@ const FarmElement = ({ farm, users = [] }: FarmElementProps) => {
                 <Text bold fontSize={16}>
                     {farm.name}
                 </Text>
-                <Text fontSize={12}>{farm.description}</Text>
+                <Text fontSize={12} numberOfLines={2}>
+                    {farm.description}
+                </Text>
             </View>
             <View style={{ marginLeft: -20 }}>
                 <View

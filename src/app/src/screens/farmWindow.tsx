@@ -130,7 +130,10 @@ const FarmWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                                     borderColor: theme().colors.secondary,
                                 }}
                                 onPress={() =>
-                                    navigation.navigate("Chat", { farm: farm })
+                                    navigation.navigate("Chat", {
+                                        farm: farm,
+                                        user: user,
+                                    })
                                 }>
                                 <IIcon
                                     name="chatbox-ellipses"
@@ -158,6 +161,7 @@ const FarmWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                                 onPress={() =>
                                     navigation.navigate("Sensors", {
                                         farm: farm,
+                                        user: user,
                                     })
                                 }>
                                 <MIcon
@@ -185,7 +189,10 @@ const FarmWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                                     ...styles.button,
                                     backgroundColor: theme().colors.background,
                                     borderColor: theme().colors.secondary,
-                                }}>
+                                }}
+                                onPress={() =>
+                                    navigation.navigate("Tasks", { farm: farm })
+                                }>
                                 <FIcon
                                     name="tasks"
                                     size={40}

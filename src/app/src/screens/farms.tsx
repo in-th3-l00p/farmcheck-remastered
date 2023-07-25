@@ -25,6 +25,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
     const [users, setUsers] = useState<any>([]);
     const [page, setPage] = useState(0);
     const [farmCount, setFarmCount] = useState(-1);
+    const [showError, setShowError] = useState(false);
 
     const { create, getAll, getUsers, getCount } = useContext(FarmContext);
     const { userToken }: any = useContext(AuthContext);
@@ -169,6 +170,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                                     setFarmName("");
                                     setFarmDescription("");
                                     setModalVisible(false);
+                                    setShowError(false);
                                 }}
                             />
                         </Grid>
@@ -185,6 +187,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             onChange={setFarmName}
                             style={{ width: "100%", marginTop: error ? 0 : 20 }}
                             maxLength={25}
+                            errorEmpty={showError && !farmName}
                         />
                         <Input
                             placeholder="Description"
@@ -193,6 +196,7 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             style={{ marginTop: 20, height: "auto" }}
                             multiline
                             maxLength={110}
+                            errorEmpty={showError && !farmDescription}
                         />
                     </View>
                     <View>
@@ -200,24 +204,28 @@ const Farms = ({ navigation }: { navigation: any }) => {
                             text="Create"
                             style={{ marginTop: 20 }}
                             onPress={() => {
-                                create(farmName, farmDescription, userToken)
-                                    .then(() => {
-                                        setFarmName("");
-                                        setFarmDescription("");
-                                        setError("");
-                                        setModalVisible(false);
-                                        setFarmCreated(true);
-                                    })
-                                    .catch((err: any) => {
-                                        if (
-                                            err.message ===
-                                            "Request failed with status code 400"
-                                        )
-                                            setError(
-                                                "Farm name already exists"
-                                            );
-                                        else setError(err.message);
-                                    });
+                                setShowError(true);
+
+                                if (farmName && farmDescription)
+                                    create(farmName, farmDescription, userToken)
+                                        .then(() => {
+                                            setFarmName("");
+                                            setFarmDescription("");
+                                            setError("");
+                                            setModalVisible(false);
+                                            setFarmCreated(true);
+                                            setShowError(false);
+                                        })
+                                        .catch((err: any) => {
+                                            if (
+                                                err.message ===
+                                                "Request failed with status code 400"
+                                            )
+                                                setError(
+                                                    "Farm name already exists"
+                                                );
+                                            else setError(err.message);
+                                        });
                             }}
                             full
                         />

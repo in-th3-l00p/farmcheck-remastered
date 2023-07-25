@@ -14,6 +14,7 @@ import { AuthContext } from "../context/authContext";
 import { SensorContext } from "../context/sensorContext";
 import { ActiveOpacity } from "../util/constants";
 import { theme } from "../util/theme";
+import Loading from "./loading";
 
 const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -25,13 +26,11 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
     const [sensorCreated, setSensorCreated] = useState(false);
     const [sensorCount, setSensorCount] = useState(-1);
     const [sensors, setSensors] = useState<any>([]);
+    const [showError, setShowError] = useState(false);
 
-    const { farm } = route.params;
+    const { farm, user } = route.params;
     const { create, getCount, getAll } = useContext(SensorContext);
     const { userToken } = useContext(AuthContext);
-
-    const sensor = {};
-    const data: any = [];
 
     useEffect(() => {
         getAll(userToken, farm.id, page).then((res: any) => {
@@ -44,11 +43,8 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
         });
     }, [sensorCreated, page]);
 
-    // if (
-    //     (sensors.length === 0 && sensorCount !== 0) ||
-    //     sensorCount === -1
-    // )
-    //     return <Loading />;
+    if ((sensors.length === 0 && sensorCount !== 0) || sensorCount === -1)
+        return <Loading />;
 
     return (
         <View
@@ -82,15 +78,17 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                         </Text>
                     </View>
 
-                    <IconButton
-                        icon="plus"
-                        iconColor={theme().colors.light}
-                        size={30}
-                        style={styles.add}
-                        animated
-                        containerColor={theme().colors.primary}
-                        onPress={() => setModalVisible(true)}
-                    />
+                    {user.role !== "WORKER" && (
+                        <IconButton
+                            icon="plus"
+                            iconColor={theme().colors.light}
+                            size={30}
+                            style={styles.add}
+                            animated
+                            containerColor={theme().colors.primary}
+                            onPress={() => setModalVisible(true)}
+                        />
+                    )}
                 </View>
 
                 <View>
@@ -108,7 +106,7 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                         }}
                     />
                 </View>
-                <View style={{ width: "100%" }}>
+                <View>
                     <View style={{ alignItems: "center" }}>
                         {sensors.length === 0 ? (
                             <View
@@ -118,42 +116,61 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                                     width: 250,
                                 }}>
                                 <Text center>
-                                    You have no sensors yet. Click the plus icon
-                                    to create a new sensor.
+                                    {user.role === "WORKER"
+                                        ? "This farm has no sensors yet."
+                                        : "This farm has no sensors yet. Click the plus iconto create a new sensor."}
                                 </Text>
                             </View>
                         ) : (
-                            <View>
-                                {sensors.map(
-                                    (farm: any, index: any) =>
-                                        index < 5 && (
+                            <View style={styles.gridContainer}>
+                                {sensors.map((sensor: any, index: any) =>
+                                    searchQuery !== "" ? (
+                                        sensor.name.startsWith(
+                                            searchQuery.toLowerCase()
+                                        ) && (
                                             <TouchableOpacity
                                                 key={index}
                                                 activeOpacity={ActiveOpacity}
                                                 onPress={() => {
                                                     navigation.navigate(
-                                                        "Window",
+                                                        "SensorWindow",
                                                         {
                                                             sensor: sensor,
-                                                            data: data,
                                                         }
                                                     );
                                                 }}>
                                                 <SensorElement
                                                     sensor={sensor}
-                                                    data={data[index]}
                                                     key={index}
                                                 />
                                             </TouchableOpacity>
                                         )
+                                    ) : (
+                                        <TouchableOpacity
+                                            key={index}
+                                            activeOpacity={ActiveOpacity}
+                                            onPress={() => {
+                                                navigation.navigate(
+                                                    "SensorWindow",
+                                                    {
+                                                        sensor: sensor,
+                                                    }
+                                                );
+                                            }}>
+                                            <SensorElement
+                                                sensor={sensor}
+                                                key={index}
+                                            />
+                                        </TouchableOpacity>
+                                    )
                                 )}
                             </View>
                         )}
                     </View>
                 </View>
-                {sensorCount > 5 && (
+                {sensorCount > 5 && searchQuery === "" && (
                     <PageController
-                        max={0}
+                        max={Math.ceil(sensorCount / 6) - 1}
                         page={page}
                         setPage={setPage}
                         position="absolute"
@@ -182,6 +199,7 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                                     setSensorName("");
                                     setSensorDescription("");
                                     setError("");
+                                    setShowError(false);
                                 }}
                             />
                         </Grid>
@@ -198,6 +216,7 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                             onChange={setSensorName}
                             style={{ width: "100%", marginTop: error ? 0 : 20 }}
                             maxLength={25}
+                            errorEmpty={showError && !sensorName}
                         />
                         <Input
                             placeholder="Description"
@@ -206,6 +225,7 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                             style={{ marginTop: 20, height: "auto" }}
                             multiline
                             maxLength={110}
+                            errorEmpty={showError && !sensorDescription}
                         />
                     </View>
                     <View>
@@ -213,24 +233,34 @@ const Sensors = ({ navigation, route }: { navigation: any; route: any }) => {
                             text="Create"
                             style={{ marginTop: 20 }}
                             onPress={() => {
-                                create(sensorName, sensorDescription, userToken)
-                                    .then(() => {
-                                        setError("");
-                                        setSensorName("");
-                                        setSensorDescription("");
-                                        setModalVisible(false);
-                                        setSensorCreated(true);
-                                    })
-                                    .catch((err: any) => {
-                                        if (
-                                            err.message ===
-                                            "Request failed with status code 400"
-                                        )
-                                            setError(
-                                                "Farm name already exists"
-                                            );
-                                        else setError(err.message);
-                                    });
+                                setShowError(true);
+
+                                if (sensorName && sensorDescription)
+                                    create(
+                                        sensorName,
+                                        sensorDescription,
+                                        userToken,
+                                        farm.id
+                                    )
+                                        .then(() => {
+                                            setError("");
+                                            setSensorName("");
+                                            setSensorDescription("");
+                                            setModalVisible(false);
+                                            setSensorCreated(true);
+                                            setShowError(false);
+                                        })
+                                        .catch((err: any) => {
+                                            console.log(err);
+                                            if (
+                                                err.message ===
+                                                "Request failed with status code 400"
+                                            )
+                                                setError(
+                                                    "Sensor name already exists"
+                                                );
+                                            else setError(err.message);
+                                        });
                             }}
                             full
                         />
@@ -266,7 +296,7 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     search: {
-        marginTop: 35,
+        marginTop: 25,
         width: 310,
         alignSelf: "center",
         height: 40,
@@ -285,6 +315,13 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35,
         borderRadius: 50,
+    },
+    gridContainer: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: 40,
     },
 });
 
