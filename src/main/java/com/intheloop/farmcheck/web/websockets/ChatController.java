@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
     private final ChatService chatService;
     private final AuthenticationUtils authenticationUtils;
-    private final Logger logger = (Logger) LoggerFactory.getLogger(ChatServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(ChatServiceImpl.class);
 
     public ChatController(ChatService chatService, AuthenticationUtils authenticationUtils) {
         this.chatService = chatService;
@@ -29,6 +29,10 @@ public class ChatController {
             MessageDTO messageDTO
     ) {
         logger.debug(authenticationUtils.getAuthentication().getUsername());
+        chatService.createMessage(
+                chatService.get(chatId),
+                messageDTO.getContent()
+        );
         return messageDTO;
     }
 }
