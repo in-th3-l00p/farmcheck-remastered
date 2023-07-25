@@ -1,9 +1,6 @@
 package com.intheloop.farmcheck.service.impl;
 
-import com.intheloop.farmcheck.domain.Chat;
-import com.intheloop.farmcheck.domain.Farm;
-import com.intheloop.farmcheck.domain.FarmUser;
-import com.intheloop.farmcheck.domain.Message;
+import com.intheloop.farmcheck.domain.*;
 import com.intheloop.farmcheck.repository.ChatRepository;
 import com.intheloop.farmcheck.repository.FarmUserRepository;
 import com.intheloop.farmcheck.repository.MessageRepository;
@@ -90,6 +87,15 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
+    public Chat getAsAdmin(Long id) {
+        return chatRepository.findById(id).orElseThrow(
+                () -> new ResponseException(
+                        "Chat not found", HttpStatus.NOT_FOUND
+                )
+        );
+    }
+
+    @Override
     public Chat update(Long id, String name, String description) {
         if (name.isEmpty())
             throw new ResponseException("Name is required");
@@ -140,18 +146,16 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public Message createMessage(Chat chat, String content) {
+    public Message createMessage(Chat chat, String content, User user) {
         var currentFarmUser = farmUserRepository.findByFarmAndUser(
-                chat.getFarm(), authenticationUtils.getAuthentication()
+                chat.getFarm(), user
         );
         if (currentFarmUser.isEmpty())
             throw FarmServiceImpl.NOT_IN_FARM;
         var message = new Message();
         message.setContent(content);
         message.setChatId(chat.getId());
-        message.setSenderUsername(authenticationUtils
-                .getAuthentication()
-                .getUsername());
+        message.setSenderUsername(user.getUsername());
         return messageRepository.save(message);
     }
 }

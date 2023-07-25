@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { Client } from "@stomp/stompjs";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import IIcon from "react-native-vector-icons/Ionicons";
@@ -13,7 +14,34 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
 
     const { farm, chat } = route.params;
     const { userToken } = useContext(AuthContext);
+    const [client, setClient] = useState<Client>();
 
+    useEffect(() => {
+        const client = new Client({
+            brokerURL: "ws://192.168.125.9:8080/api/v1/ws/chat",
+            connectHeaders: {
+                Authorization: `Bearer ${userToken}`,
+            },
+            debug: (str) => {
+                console.log(str);
+            },
+            onConnect: () => {
+                setClient(client);
+                client.subscribe("/topic/chat/" + chat.id, (message) => {
+                    console.log(JSON.parse(message.body));
+                });
+            },
+            onStompError: () => {
+                console.log("stomp error");
+            },
+            onWebSocketError: (err) => {
+                console.log("websocket error", err);
+            },
+        });
+        client.activate();
+    }, []);
+
+    if (client === undefined) return <></>;
     return (
         <View
             style={{
@@ -64,6 +92,14 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
                     icon="send"
                     size={30}
                     iconColor={theme().colors.primary}
+                    onPress={() => {
+                        client.publish({
+                            destination: "/app/api/v1/ws/chat/" + chat.id,
+                            headers: { token: userToken },
+                            body: text,
+                        });
+                        setText("");
+                    }}
                     style={{
                         position: "absolute",
                         right: 0,
