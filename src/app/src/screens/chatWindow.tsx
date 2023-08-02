@@ -19,7 +19,8 @@ const ChatWindow = ({ navigation, route }: { navigation: any; route: any }) => {
 
     useEffect(() => {
         const client = new Client({
-            brokerURL: "ws://192.168.125.9:8080/api/v1/ws/chat",
+            brokerURL:
+                "ws://1e6c-37-251-220-191.ngrok-free.app:8080/api/v1/ws/chat",
             connectHeaders: {
                 Authorization: `Bearer ${userToken}`,
             },
