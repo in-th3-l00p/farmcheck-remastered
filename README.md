@@ -1,34 +1,36 @@
 # FarmCheck
 
-FarmCheck este o platformă ce urmareşte rezolvarea problemelor de comunicare în cadrul unui teren agricol, dar şi monitorizarea şi automatizarea procesului de a îl întreţine. În cadrul proiectului FarmCheck, utilizatorii au acces de a îşi indexa personalul fermelor sale şi a organiza sarciniile acestora, prin sistemul de chat sau cel de taskuri.
+FarmCheck is a platform aimed at addressing communication issues within agricultural fields, as well as monitoring and automating the maintenance process. Within the FarmCheck project, users have access to index their farm personnel and organize their tasks through the chat system or task management.
 
-Pentru a monitoriza un teren agricol, oferim o soluţie IoT, printr-un senzor care trimite în timp real date cum ar fi temperatura sau umiditatea a solului şi a aerului, informaţiile fiind afişate pe aplicaţia platformei.
-Datorită interfeţei intuitive, publicul nostru ţintă este orice persoana care deţine un teren agricol şi îşi doreşte să beneficieze de funcţionalităţiile şi soluţiile noastre pentru administrarea acestuia.
+To monitor an agricultural field, we offer an IoT solution through a sensor that sends real-time data such as soil and air temperature and humidity, which is displayed on the platform's application.
 
-De asemenea, FarmCheck devine un ajutor semnificativ pentru cineva nou în agricultură, întrucât oferim informaţii generale, dar şi despre cultivarea a 40 de plante.
+Thanks to its intuitive interface, our target audience is anyone who owns agricultural land and wishes to benefit from our functionalities and solutions for managing it.
 
-FarmCheck reprezintă o inovaţie în cadrul digitalizării agriculturi, întrucât nimeni nu a mai dezvoltat un produs cu un cost atât de mic, dar o utilitate atât de mare şi o aplicaţie care poate fi folosită de oricine.
+Furthermore, FarmCheck becomes a significant aid for someone new to agriculture, as we provide general information as well as specific details about cultivating 40 different plants.
 
-## Funcţionalităţi
-* Conectarea cu un senzor şi primirea de date în timp real
-* Administrarea angajaţiilor unei ferme
-* Atribuirea de sarcini a angajaţiilor
-* Camere de chat în cadrul unei ferme
-* Pagina "CropWiki", unde oferim informaţii referitoare la o mulţime de plante
+FarmCheck represents an innovation in agricultural digitization, as no one has developed a product with such a low cost yet with such great utility, and an application that can be used by anyone.
 
-## Cum instalezi un senzor unei ferme
-În primul rând, va trebui sa creezi un nou senzor fermei unde doreşti să instalezi senzorul. Odată creat in baza de date, vei primi codul de acces.
+## Features
+-   Connecting to a sensor and receiving real-time data
+-   Managing farm employees
+-   Assigning tasks to employees
+-   Chat rooms within a farm
+-   "CropWiki" page, where we provide information about a variety of plants
 
-Odată deschis, daca produsul nu este conectat, acesta va deschide un punct de acces. Odată conectat la punctul de acces, vei fi redirecţionat pe o pagină web, unde eşti nevoit să conectezi senzorul la o reţea WiFi şi să introduci codul generat mai devreme. Odată ce trimiţi formularul, senzorul va începe să trimită date.
+## How to install the sensor of a farm
+First, you will need to create a new farm sensor where you intend to install the sensor. Once created in the database, you will receive an access code.
 
-## Tehnologii folosite
-* Backend: Spring Boot, întrucât este un framework ce oferă un mod uşor de a te folosi de cele mai noi tehnologii, cum ar fi WebSockets
-* Bază de date:
-    1. PostgreSQL - folosită pentru persistenţa de date cu o importanţă mai mare, cum ar fi informaţiile unui utilizator. Această bază de date relaţională este una dintre cele mai populare alegeri când vine vorba de persistenţa de date, având titlul de "cea mai avansată bază de date"
-    2. Redis - folosită pentru stocarea datelor care necesită persistenţă într-un volum mai mare şi au o importanţă redusă. Redis oferă o modalitate mai rapidă de salvare, folosindu-se de hashuri, astfel devine opţiunea optimă pentru stocarea datelor primite de la senzor, sau al mesajelor din camerele de chat.
-* Frontend: React Native, scris în limbajul TypeScript, pentru dezvoltarea aplicaţiei de mobil. Acest framework oferă o modalitate scalabilă de a devolta aplicaţii cross-platform (Android & IOS) pentru telefoane inteligente.
-* Arduino IDE: Un environment sigur, stabil, dar şi intuitiv pentru a dezvolta codul pus pe microcontrollerul ESP32 al senzorului.
+Once opened, if the product is not connected, it will open an access point. Once connected to the access point, you will be redirected to a web page where you will need to connect the sensor to a WiFi network and enter the code generated earlier. Once you submit the form, the sensor will start sending data.
 
-## Experienţa personală cu acest proiect
+## Used Technologies
 
-Tatăl meu a avut nevoie de o modalitate de a îşi administra terenul agricol de la distanţă. Astfel, acesta a experimentat utilitatea proiectului Farmcheck, instalându-şi un senzor şi visualizând informaţiile trimise direct de acasă, terenul aflându-se la o distanţă de aproximativ 20 de kilometri de casa noastră. Acesta mi-a oferit încrederea în a considera proiectul o adevărată inovaţie, spunându-mi cât de uşor a fost de folosit, dar şi cât de util.
+-   **Backend**: Spring Boot, chosen for its ease of integrating with the latest technologies, such as WebSockets.
+-   **Database**:
+    -  PostgreSQL - utilized for persisting critical data like user information. This relational database is one of the most popular choices for data persistence, holding the title of "the most advanced database."
+	-  Redis - used for storing data that requires higher volume persistence but has lower importance. Redis offers a faster way of saving data using hashes, making it the optimal choice for storing data received from the sensor or messages from chat rooms.
+-   **Frontend**: React Native, written in TypeScript, for mobile application development. This framework provides a scalable way to develop cross-platform applications (Android & iOS) for smartphones.
+-   **Arduino IDE**: A secure, stable, and intuitive environment for developing code deployed on the ESP32 microcontroller of the sensor.
+
+## Personal Experience with this Project
+
+My father needed a way to remotely manage his agricultural land. As a result, he tried out the FarmCheck project, installing a sensor and viewing the information sent directly from home, while the field was located about 20 kilometers away from our house. This experience instilled in me the confidence to consider the project a true innovation, as he told me how easy it was to use and how valuable it proved to be.
